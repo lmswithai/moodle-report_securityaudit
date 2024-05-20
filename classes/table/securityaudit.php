@@ -121,10 +121,10 @@ class securityaudit extends \core\check\table {
         foreach ($this->checks as $check) {
             $ref = $check->get_ref();
             $result = $check->get_result();
-            $component = $check->get_component();
             $actionlink = $check->get_action_link();
+            $status = $result->get_status();
 
-            if ($result->status == \core\check\result::OK) {
+            if ($status == \core\check\result::OK) {
                 continue;
             }
 

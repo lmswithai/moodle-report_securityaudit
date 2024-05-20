@@ -38,7 +38,7 @@ use core\check\result;
 class enablewebservices extends \core\check\check {
 
     /**
-     * A link to a place to action this
+     * A link to a place to action this.
      *
      * @return action_link
      */
@@ -49,7 +49,8 @@ class enablewebservices extends \core\check\check {
     }
 
     /**
-     * Return result
+     * Return result.
+     *
      * @return result
      */
     public function get_result(): result {

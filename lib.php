@@ -25,8 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-
-
 /**
  * Add security check to make sure this isn't on in production.
  *
@@ -47,21 +45,15 @@ function report_securityaudit_securityaudit_checks() {
 	];
 }
 
-
 /**
- * Display in standard security report?
+ * No display in standard security report.
  *
- * @return bolen true/false
+ * @return boolen false
  */
 function report_securityaudit_display_in_security_checks() {
 
-	$display = false;
-
-	return $display;
-
+	return false;
 }
-
-
 
 /**
  * Add security check to make sure this isn't on in production.
@@ -75,5 +67,4 @@ function report_securityaudit_security_checks() {
 	}
 
 	return [];
-
 }

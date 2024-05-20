@@ -20,8 +20,11 @@
  * @copyright   2024, LMSwithAI <contact@lmswithai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace report_securityaudit\privacy;
+
 defined('MOODLE_INTERNAL') || die();
+
 /**
  * Privacy Subsystem for auth_none implementing null_provider.
  *
