@@ -24,14 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-
-    'report/securityaudit:view' => array(
+$capabilities = [
+    'report/securityaudit:view' => [
         'riskbitmask' => RISK_CONFIG,
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        ),
-    )
-);
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+];

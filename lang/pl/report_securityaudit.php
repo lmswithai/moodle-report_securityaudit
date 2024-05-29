@@ -24,60 +24,80 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Raport audyt zabezpieczeń';
+$string['pluginname'] = 'Raport audytu zabezpieczeń';
 $string['securityaudit'] = 'Audyt zabezpieczeń';
-
-// New security check.
-// enablewebservices.
 $string['checkenablewebservices'] = 'Aktywne protokoły usług sieciowych';
-$string['checkenablewebserviceserror'] = 'Włączone usługi sieciowe. Jeśli niepotrzebne to wyłączyć.';
-$string['checkenablewebserviceshok'] = 'Usługi sieciowe są wyłaczone, co zwiększa bezpieczeństwo.';
+$string['checkenablewebserviceserror'] = 'Włączone usługi sieciowe. Jeśli niepotrzebne, to należy je wyłączyć.';
+$string['checkenablewebserviceshok'] = 'Usługi sieciowe są wyłączone, co zwiększa bezpieczeństwo.';
 $string['checkenablewebservicesdetails'] = 'Do zweryfikowania możesz sprawdzić <a href="{$a}">Aktywne protokoły usług sieciowych</a>.';
-
-// cookiesecure.
 $string['checkcookiesecure'] = 'Tylko bezpieczne ciasteczka';
-$string['checkcookiesecureerror'] = 'Jeśli serwer akceptuje tylko połączenia https: zaleca się włączyć wysyłanie bezpiecznych ciasteczek.';
-$string['checkcookiesecurehok'] = 'Włączone są tylko bezpieczne ciasteczka';
+$string['checkcookiesecureerror'] = 'Jeśli serwer akceptuje tylko połączenia HTTPS, zaleca się włączyć wysyłanie bezpiecznych ciasteczek.';
+$string['checkcookiesecurehok'] = 'Włączone są tylko bezpieczne ciasteczka.';
 $string['checkcookiesecuredetails'] = 'Zgodnie z informacjami z ustawień.';
-
-// debug.
 $string['checkdebug'] = 'Komunikaty usuwania błędów';
 $string['checkdebugerror'] = 'Ustawiona jest inna opcja niż <i>ŻADNE: Nie pokazuj żadnych błędów ani komunikatów</i>.';
 $string['checkdebughok'] = 'Ustawione na <i>ŻADNE: Nie pokazuj żadnych błędów ani komunikatów</i>.';
 $string['checkdebugdetails'] = '';
-
-// debugdisplay.
-$string['checkdebugdisplay'] = 'Wyświetl komunikaty błędów';
-$string['checkdebugdisplayerror'] = 'Włączone wyświetlane komunikatów błędów które trafią na strony HTML.';
-$string['checkdebugdisplayhok'] = 'Wyświetl komunikatów błędów jest wyłączone.';
+$string['checkdebugdisplay'] = 'Wyświetlanie komunikatów błędów';
+$string['checkdebugdisplayerror'] = 'Włączone wyświetlanie komunikatów błędów, które trafią na strony HTML.';
+$string['checkdebugdisplayhok'] = 'Wyświetlanie komunikatów błędów jest wyłączone.';
 $string['checkdebugdisplaydetails'] = '';
-
-// debugdisplay.
 $string['checkpasswordexpiration'] = 'Włącz wygaśnięcie hasła dla autoryzacji <i>auth_manual</i>.';
-$string['checkpasswordexpirationerror'] = 'Wymuś zmien hasła po x dniach od jego ostatniego zaktualizowania dla autoryzacji <i>auth_manual</i>.';
-$string['checkpasswordexpirationhok'] = 'Włączone wygaśnięcie hasła.';
+$string['checkpasswordexpirationerror'] = 'Wymuś zmianę hasła po x dniach od jego ostatniego zaktualizowania dla autoryzacji <i>auth_manual</i>.';
+$string['checkpasswordexpirationhok'] = 'Wygaśnięcie hasła jest włączone.';
 $string['checkpasswordexpirationdetails'] = '';
-
-// minpasswordlength.
 $string['checkminpasswordlength'] = 'Długość hasła';
 $string['checkminpasswordlengtherror'] = 'Długość hasła wynosi {$a}, standardowe minimum wynosi 8 znaków.';
 $string['checkminpasswordlengthhok'] = 'Długość hasła spełnia minimum.';
 $string['checkminpasswordlengthdetails'] = '';
-
-// guestloginbutton.
-$string['checkguestloginbutton'] = 'Przycisk logowania jako gościa';
-$string['checkguestloginbuttonerror'] = 'Przycisk logowania gościa na stronie logowania jest dostępny.';
-$string['checkguestloginbuttonhok'] = 'Przycisk logowania gościa ukryty.';
+$string['checkguestloginbutton'] = 'Przycisk logowania jako gość';
+$string['checkguestloginbuttonerror'] = 'Przycisk logowania jako gość na stronie logowania jest dostępny.';
+$string['checkguestloginbuttonhok'] = 'Przycisk logowania jako gość jest ukryty.';
 $string['checkguestloginbuttondetails'] = '';
-
-// backup_auto_active.
 $string['checkbackup_auto_active'] = 'Kopie zapasowe kursów';
-$string['checkbackup_auto_activeerror'] = 'Nie są skonfigurowane żadne kopie zapasowę automatyczne bądź ręczne kursów.';
-$string['checkbackup_auto_activehok'] = 'Kopie zapasowe właczone. Warto od czasu do czasu przejrzeć poprawność ich wykonywania.';
+$string['checkbackup_auto_activeerror'] = 'Nie są skonfigurowane żadne automatyczne ani ręczne kopie zapasowe kursów.';
+$string['checkbackup_auto_activehok'] = 'Kopie zapasowe są włączone. Warto od czasu do czasu przejrzeć poprawność ich wykonywania.';
 $string['checkbackup_auto_activedetails'] = '';
-
-// cron.
+$string['checkvulnerabilities'] = 'Znane podatności';
+$string['checkvulnerabilitieserror'] = 'Błąd odczytu wersji Moodle. Zgłoś autorowi wtyczki.';
+$string['checkvulnerabilitiesnosupporterror'] = 'Ta wersja Moodle nie ma już wsparcia bezpieczeństwa, zalecana jest aktualizacja do nowszej wersji.';
+$string['checkvulnerabilitiesfounderror'] = 'Znaleziono <span class="badge badge-danger">{$a}</span> podatności dla tej wersji Moodle.';
+$string['checkvulnerabilitieshok'] = 'Na ten moment nie są zgłoszone żadne podatności dla tej wersji Moodle.';
+$string['checkvulnerabilitiesdetails'] = '<h2>Znalezione podatności:</h2>';
+$string['checkvulnerabilitieshunknown'] = 'Nie udało się nawiązać połączenia do serwera analizy.';
+$string['vulnerabilitie'] = 'Podatność';
+$string['cve'] = 'CVE';
 $string['checkcron'] = 'Działanie Crona';
 $string['checkcronerror'] = 'Cron nie działa prawidłowo.';
 $string['checkcronhok'] = 'Cron działa.';
 $string['checkcrondetails'] = '';
+$string['btnbackas'] = 'Wróć do administracji serwisu';
+$string['lastcheck'] = 'Ostatnie sprawdzenie:';
+$string['logfailmodule'] = 'Liczba błędów z 7 dni';
+$string['overallmodule'] = 'Ogólna ocena';
+$string['envirolment'] = 'Środowisko uruchomieniowe LMS';
+$string['accessoutside'] = 'Dane dostępne z zewnątrz';
+$string['gdpr'] = 'RODO';
+$string['security'] = 'Bezpieczeństwo';
+$string['usersaccount'] = 'Konta użytkowników';
+$string['backups'] = 'Kopie zapasowe';
+$string['notassigned'] = 'Nieprzypisane';
+$string['description'] = 'Opis';
+$string['action'] = 'Akcje';
+$string['status'] = 'Status';
+$string['countfailed'] = 'Liczba zgłoszonych potencjalnych problemów';
+$string['countsuccess'] = 'Liczba prawidłowych';
+$string['nofail_title'] = 'Dobrze!';
+$string['nofail_desc'] = 'Ten obszar nie zgłasza problemów.';
+$string['critical'] = 'Krytyczne';
+$string['critical_desc'] = 'Zajmij się nimi prędko!';
+$string['moderate'] = 'Średnie';
+$string['moderate_desc'] = 'Zapoznaj się i zdecyduj.';
+$string['info'] = 'Informacje';
+$string['info_desc'] = 'Sprawdź w wolnej chwili...';
+$string['normal'] = 'Prawidłowe';
+$string['normal_desc'] = 'Bardzo dobrze.';
+$string['unknown'] = 'Nieznany';
+$string['other'] = 'Reszta';
+$string['quantity'] = 'Liczba';
+$string['formlmswitaibtn'] = 'Zgłoś błąd / prośbę o pomoc / nową funkcjonalność';

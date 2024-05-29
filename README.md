@@ -1,5 +1,7 @@
 # Report security audit
 
+![screenshot](pix/screen1.png "Report security audit Screenshot")
+
 ---------
 
 The report is an extension of the security report, displaying only the problematic elements and adding new areas such as Web Services Configuration, Secure Cookies, Debugging Messages, Error Message Display, Password Policies, Guest Login Button, Course Backups, and Cron Operation.

@@ -24,8 +24,6 @@
 
 namespace report_securityaudit\check;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\check\result;
 
 /**
@@ -38,7 +36,7 @@ use core\check\result;
 class cookiesecure extends \core\check\check {
 
     /**
-     * A link to a place to action this.
+     * A link to a place to action this
      *
      * @return action_link
      */
@@ -49,12 +47,10 @@ class cookiesecure extends \core\check\check {
     }
 
     /**
-     * Return result.
-     *
+     * Return result
      * @return result
      */
     public function get_result(): result {
-
 
         if (!get_config('core', 'cookiesecure')) {
             $status = result::WARNING;
@@ -64,8 +60,8 @@ class cookiesecure extends \core\check\check {
             $summary = get_string('checkcookiesecurehok', 'report_securityaudit');
         }
 
-        //$link = new \moodle_url('/admin/settings.php?section=webserviceprotocols');
-        $details = get_string('checkcookiesecuredetails', 'report_securityaudit') . ' ' . get_string('configcookiesecure', 'admin');
+        $details = get_string('checkcookiesecuredetails', 'report_securityaudit');
+        $details .= ' ' . get_string('configcookiesecure', 'admin');
 
         return new result($status, $summary, $details);
     }

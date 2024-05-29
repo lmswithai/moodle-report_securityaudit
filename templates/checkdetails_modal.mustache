@@ -1,0 +1,50 @@
+ <div class="modal fade {{dataclass}}" tabindex="-1" role="dialog" aria-labelledby="{{name}}" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="badge status-bg-{{ status }} me-2">{{{ statusname }}}</div> <h5 class="modal-title" id="{{dataclass}}_title">{{name}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body widget-content">
+                {{#summary}}
+                <div class="widget-content-outer">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading"><i class="fa fa-file-alt icon-gradient bg-happy-itmeo pr-2"> </i> {{#str}}description{{/str}}</div>
+                            <p>{{{summary}}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/summary}}
+                {{#details}}
+                <div class="widget-content-outer">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading"><i class="fa fa-search icon-gradient bg-happy-itmeo pr-2"> </i> {{#str}}details{{/str}}</div>
+                            <p>{{{details}}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{/details}}
+
+                {{#url}}
+                <div class="widget-content-outer">
+                    <div class="widget-content-outer">
+                        <div class="widget-content-wrapper">
+                            <div class="widget-content-left">
+                                <div class="widget-heading"><i class="fa fa-link icon-gradient bg-happy-itmeo pr-2"> </i> {{#str}}action{{/str}}</div>
+                                <p class="py-1">
+                                 <a href="{{link}}" target="_blank" type="button" class="btn btn-outline-primary btn-sm">{{title}}</a>
+                                 </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/url}}
+
+            </div>
+                <div class="modal-footer justify-content-start"></div>
+        </div>
+    </div>
+</div>

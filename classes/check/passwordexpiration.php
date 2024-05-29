@@ -24,8 +24,6 @@
 
 namespace report_securityaudit\check;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\check\result;
 
 /**
@@ -38,7 +36,7 @@ use core\check\result;
 class passwordexpiration extends \core\check\check {
 
     /**
-     * A link to a place to action this.
+     * A link to a place to action this
      *
      * @return action_link
      */
@@ -49,12 +47,10 @@ class passwordexpiration extends \core\check\check {
     }
 
     /**
-     * Return result.
-     *
+     * Return result
      * @return result
      */
     public function get_result(): result {
-
 
         if (!get_config('auth_manual', 'expiration')) {
             $status = result::WARNING;

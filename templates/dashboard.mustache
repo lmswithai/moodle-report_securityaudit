@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    {{# base }}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Language" content="en">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="shortcut icon" href="{{{favicon}}}" type="image/x-icon">
+        <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <meta name="msapplication-tap-highlight" content="no">
+        {{# headjs }}
+            <script {{#module}}type="module"{{/module}} src="{{{url}}}"></script>
+        {{/ headjs }}
+        {{# headcss }}
+                <link href="{{{url}}}" rel="stylesheet">
+        {{/ headcss }}
+
+        <!--
+        =========================================================
+        * ArchitectUI HTML Theme Dashboard - v4.0.0
+        =========================================================
+        * Product Page: https://dashboardpack.com
+        * Copyright 2023 DashboardPack (https://dashboardpack.com)
+        * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+        =========================================================
+        * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+        -->
+    {{/ base }}
+    </head>
+    <body>
+        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+            <div class="app-main">
+                {{> report_securityaudit/dashboard_header }}
+                    <div class="securityaudit-dashboard">
+                        {{> report_securityaudit/page-title }}
+                        <div class="row">
+                            <div class="col-md-6 col-xl-8 mb-3">
+                            {{# summary }}
+                                {{! Krytyczne }}
+                                <div class="card mb-2 widget-content bg-danger">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                <i class="fa fa-fire icon-gradient bg-heavy-rain fa-2x"> </i>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">{{#str}}critical,  report_securityaudit{{/str}}</div>
+                                            <div class="widget-subheading">{{#str}}critical_desc,  report_securityaudit{{/str}}</div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span id="summary-critical">0</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{! Średnie }}
+                                <div class="card mb-2 widget-content bg-warning">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                <i class="fa fa-triangle-exclamation icon-gradient bg-heavy-rain fa-2x"> </i>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">{{#str}}moderate,  report_securityaudit{{/str}}</div>
+                                            <div class="widget-subheading">{{#str}}moderate_desc,  report_securityaudit{{/str}}</div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span id="summary-moderate">0</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{! Prawidłowo }}
+                                <div class="card mb-2 widget-content bg-success">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                <i class="fa fa-circle-check icon-gradient bg-heavy-rain fa-2x"> </i>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">{{#str}}normal,  report_securityaudit{{/str}}</div>
+                                            <div class="widget-subheading">{{#str}}normal_desc,  report_securityaudit{{/str}}</div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span id="summary-normal">0</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{! Informacje }}
+                                <div class="card mb-2 widget-content bg-info">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="widget-content-left">
+                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                <i class="fa fa-circle-info icon-gradient bg-heavy-rain fa-2x"> </i>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content-left">
+                                            <div class="widget-heading">{{#str}}info,  report_securityaudit{{/str}}</div>
+                                            <div class="widget-subheading">{{#str}}info_desc,  report_securityaudit{{/str}}</div>
+                                        </div>
+                                        <div class="widget-content-right">
+                                            <div class="widget-numbers text-white"><span id="summary-info">0</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {{/ summary }}
+                            </div>
+
+                            <div class="col-md-6 col-xl-4 mb-3">
+
+                                {{! Ogólna ocena }}
+                                <div class="card" style="height: calc(100% - 0.5rem);">
+                                    <div class="card-header-tab card-header">
+                                        <div class="card-header-title">
+                                            <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
+                                            {{#str}}overallmodule, report_securityaudit{{/str}}
+                                        </div>
+                                    </div>
+                                    <div class="tab-content">
+                                            <div class="tab-pane fade active show" id="tab-eg-55">
+                                                <div class="widget-chart p-3">
+                                                    <div style="height: 260px">
+                                                        <canvas id="overall-rating"></canvas>
+                                                    <div class="widget-chart-content text-center mt-5">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{# modules }}
+                        <div class="row">
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-250ms">
+                            {{# envirolment}}
+                                {{> report_securityaudit/module }}
+                            {{/ envirolment}}
+                            </div>
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-500ms">
+                            {{# accessoutside}}
+                                {{> report_securityaudit/module }}
+                            {{/ accessoutside}}
+                            </div>
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-750ms">
+                            {{# gdpr}}
+                                {{> report_securityaudit/module }}
+                            {{/ gdpr}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1250ms">
+                            {{# security}}
+                                {{> report_securityaudit/module }}
+                            {{/ security}}
+                            </div>
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1500ms">
+                            {{# usersaccount}}
+                                {{> report_securityaudit/module }}
+                            {{/ usersaccount}}
+                            </div>
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1750ms">
+                            {{# backups}}
+                                {{> report_securityaudit/module }}
+                            {{/ backups}}
+                            </div>
+                        </div>
+
+                        {{# notassigned}}
+                        <div class="row">
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2s">
+                                {{> report_securityaudit/module }}
+
+                            </div>
+                        </div>
+                        {{/ notassigned}}
+                        {{/ modules }}
+                </div>
+            </div>
+        </div>
+
+
+        {{> report_securityaudit/components/footer }}
+
+        {{# modal}}
+            {{> report_securityaudit/checkdetails_modal }}
+        {{/ modal}}
+
+
+        {{# jssummary }}
+            <script >var datasummary = JSON.parse('{{{datasummary}}}');</script>
+            <script src="{{url}}"></script>
+        {{/ jssummary }}
+        {{# overallrating }}
+            <script>var dataoverallrating = JSON.parse('{{{dataoverallrating}}}');</script>
+            <script src="{{url}}"></script>
+        {{/ overallrating }}
+
+        <script>
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        </script>
+
+    </body>
+</html>

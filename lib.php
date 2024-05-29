@@ -19,11 +19,9 @@
  *
  * @package     report_securityaudit
  * @copyright   2024, LMSwithAI <contact@lmswithai.com>
-
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Add security check to make sure this isn't on in production.
@@ -33,26 +31,29 @@ defined('MOODLE_INTERNAL') || die();
 function report_securityaudit_securityaudit_checks() {
 
     return [
-		new report_securityaudit\check\enablewebservices(),
-		new report_securityaudit\check\cookiesecure(),
-		new report_securityaudit\check\debug(),
-		new report_securityaudit\check\debugdisplay(),
-		new report_securityaudit\check\passwordexpiration(),
-		new report_securityaudit\check\minpasswordlength(),
-		new report_securityaudit\check\guestloginbutton(),
-		new report_securityaudit\check\backup_auto_active(),
-		new report_securityaudit\check\cron()
-	];
+    new report_securityaudit\check\enablewebservices(),
+    new report_securityaudit\check\cookiesecure(),
+    new report_securityaudit\check\debug(),
+    new report_securityaudit\check\debugdisplay(),
+    new report_securityaudit\check\passwordexpiration(),
+    new report_securityaudit\check\minpasswordlength(),
+    new report_securityaudit\check\guestloginbutton(),
+    new report_securityaudit\check\backup_auto_active(),
+    new report_securityaudit\check\cron(),
+    ];
 }
 
 /**
- * No display in standard security report.
+ * Display in standard security report?
  *
- * @return boolen false
+ * @return bolen true/false
  */
 function report_securityaudit_display_in_security_checks() {
 
-	return false;
+    $display = false;
+
+    return $display;
+
 }
 
 /**
@@ -62,9 +63,10 @@ function report_securityaudit_display_in_security_checks() {
  */
 function report_securityaudit_security_checks() {
 
-	if (report_securityaudit_display_in_security_checks()) {
-		return report_securityaudit_securityaudit_checks();
-	}
+    if (report_securityaudit_display_in_security_checks()) {
+        return report_securityaudit_securityaudit_checks();
+    }
 
-	return [];
+    return [];
+
 }

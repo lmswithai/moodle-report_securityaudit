@@ -13,30 +13,36 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-/**
- * Privacy Subsystem implementation for auth_none.
- *
- * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-namespace report_securityaudit\privacy;
 
 /**
- * Privacy Subsystem for auth_none implementing null_provider.
+ * A table of check results
  *
  * @package     report_securityaudit
  * @copyright   2024, LMSwithAI <contact@lmswithai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\null_provider {
+
+namespace report_securityaudit\output;
+
+use plugin_renderer_base;
+
+/**
+ * The renderer for the report securityaudit.
+ *
+ * @copyright   2024, LMSwithAI <contact@lmswithai.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class renderer extends plugin_renderer_base {
     /**
-     * Get the language string identifier with the component's language
-     * file to explain why this plugin stores no data.
+     * Defer to template.
      *
-     * @return  string
+     * @param index_page $page
+     *
+     * @return string html for the page
      */
-    public static function get_reason(): string {
-        return 'privacy:metadata';
+    public function render_index_page($page): string {
+        $data = $page->export_for_template($this);
+
+        return parent::render_from_template('report_securityaudit/dashboard', $data);
     }
 }

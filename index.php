@@ -26,21 +26,25 @@ define('NO_OUTPUT_BUFFERING', true);
 
 require('../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
+require_once($CFG->dirroot.'/report/securityaudit/lib.php');
 
 admin_externalpage_setup('reportsecurity', '', null, '', ['pagelayout' => 'report']);
 
 $detail = optional_param('detail', '', PARAM_TEXT); // Show detailed info about one check only.
 
 $url = '/report/securityaudit/index.php';
-$table = new report_securityaudit\table\securityaudit('security', $url, $detail);
+$output = $PAGE->get_renderer('report_securityaudit');
+
+$PAGE->set_pagelayout('embedded');
+$PAGE->blocks->show_only_fake_blocks();
+
+$dashboard = new \report_securityaudit\output\dashboard('security', $url, $detail);
 
 if (!empty($table->detail)) {
     $PAGE->set_docs_path($url . '?detail=' . $detail);
     $PAGE->navbar->add($table->detail->get_name());
 }
 
-$PAGE->set_title(get_string('securityaudit', 'report_securityaudit'));
-echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('securityaudit', 'report_securityaudit'));
-echo $table->render($OUTPUT);
-echo $OUTPUT->footer();
+$dashboard->set_title(get_string('securityaudit', 'report_securityaudit'));
+// Render.
+echo $output->render($dashboard);

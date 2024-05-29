@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('reports', new admin_externalpage('reportsecurityaudit', get_string('securityaudit', 'report_securityaudit'),
-    "$CFG->wwwroot/report/securityaudit/index.php", 'report/securityaudit:view'));
+$ADMIN->add('reports', new admin_externalpage('reportsecurityaudit_report', get_string('securityaudit', 'report_securityaudit'),
+"$CFG->wwwroot/report/securityaudit/index.php", 'report/securityaudit:view'));
 
 // No report settings.
 $settings = null;
