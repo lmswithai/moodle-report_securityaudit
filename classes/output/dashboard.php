@@ -266,7 +266,7 @@ class dashboard implements renderable, templatable {
             'icon'          => $icon,
             'success'       => 0,
             'failed'        => 0,
-            'failedcolor'   => 'bg-premium-dark',
+            'failedcolor'   => 'bg-happy-green',
             'critical'      => 0,
             'moderate'      => 0,
             'info'          => 0,
@@ -321,7 +321,7 @@ class dashboard implements renderable, templatable {
 
         return [
             'dataclass' => 'checkdetails_' . $ref,
-            'name'      => $check->get_name(),
+            'name'      => format_string($check->get_name()),
             'statusname'    => get_string($status, 'report_securityaudit'),
             'status'    => $status,
             'url'       => $url,

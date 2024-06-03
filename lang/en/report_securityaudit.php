@@ -43,7 +43,7 @@ $string['checkdebugdisplayerror'] = 'Displaying of error messages which will app
 $string['checkdebugdisplayhok'] = 'Display of error messages is disabled.';
 $string['checkdebugdisplaydetails'] = '';
 $string['checkpasswordexpiration'] = 'Enable password expiration for <i>auth_manual</i> authentication.';
-$string['checkpasswordexpirationerror'] = 'Enforce password change after x days from its last update for <i>auth_manual</i> authentication.';
+$string['checkpasswordexpirationerror'] = 'Force a password change after a specified number of days after it was last updated for <i>auth_manual</i> authorization.';
 $string['checkpasswordexpirationhok'] = 'Password expiration enabled.';
 $string['checkpasswordexpirationdetails'] = '';
 $string['checkminpasswordlength'] = 'Password length';
@@ -101,3 +101,5 @@ $string['unknown'] = 'Unknown';
 $string['other'] = 'Other';
 $string['quantity'] = 'Quantity';
 $string['formlmswitaibtn'] = 'Report a bug / request help / new feature';
+$string['securityaudit:view'] = 'View security audit report';
+

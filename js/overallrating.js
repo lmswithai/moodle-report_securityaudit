@@ -2,7 +2,7 @@
  * Display chart overallrating.
  *
  * @module     report_securityaudit/overallrating
- * @copyright  2024 INTERSIEC <pomoc@intersiec.com.pl>
+ * @copyright  2024, LMSwithAI <contact@lmswithai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
