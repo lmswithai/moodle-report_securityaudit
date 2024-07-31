@@ -18,15 +18,15 @@
  * Plugin version and other meta-data are defined here.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
+ * @copyright   2024, when2update.com <consultations@when2update.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'report_securityaudit';
-$plugin->release = '0.2.0.1';
-$plugin->version = 2024060301;
+$plugin->release = '0.3.0.0';
+$plugin->version = 2024073100;
 $plugin->requires = 2020061500;
 $plugin->supported = [39, 404];
 $plugin->maturity = MATURITY_RC;

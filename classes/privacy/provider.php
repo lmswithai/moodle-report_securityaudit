@@ -17,7 +17,7 @@
  * Privacy Subsystem implementation for auth_none.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
+ * @copyright   2024, when2update.com <consultations@when2update.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace report_securityaudit\privacy;
@@ -26,8 +26,8 @@ namespace report_securityaudit\privacy;
  * Privacy Subsystem for auth_none implementing null_provider.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {
     /**

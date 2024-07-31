@@ -18,8 +18,8 @@
  *  Adds for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\check;
@@ -31,8 +31,8 @@ use tool_task\check\cronrunning;
  *  Adds for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cron extends \core\check\check {
 

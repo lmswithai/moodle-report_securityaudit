@@ -18,8 +18,8 @@
  * Plugin functions for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 
@@ -30,17 +30,26 @@
  */
 function report_securityaudit_securityaudit_checks() {
 
-    return [
-    new report_securityaudit\check\enablewebservices(),
-    new report_securityaudit\check\cookiesecure(),
-    new report_securityaudit\check\debug(),
-    new report_securityaudit\check\debugdisplay(),
-    new report_securityaudit\check\passwordexpiration(),
-    new report_securityaudit\check\minpasswordlength(),
-    new report_securityaudit\check\guestloginbutton(),
-    new report_securityaudit\check\backup_auto_active(),
-    new report_securityaudit\check\cron(),
+    $newchecks = [
+        new report_securityaudit\check\enablewebservices(),
+        new report_securityaudit\check\cookiesecure(),
+        new report_securityaudit\check\debug(),
+        new report_securityaudit\check\debugdisplay(),
+        new report_securityaudit\check\passwordexpiration(),
+        new report_securityaudit\check\minpasswordlength(),
+        new report_securityaudit\check\guestloginbutton(),
+        new report_securityaudit\check\backup_auto_active(),
+        new report_securityaudit\check\cron()
     ];
+
+    if (get_config('report_securityaudit', 'checkw2a') == 1) {
+        $newchecks[] = new report_securityaudit\check\vulnerabilities_moodle();
+        $newchecks[] = new report_securityaudit\check\vulnerabilities_php();
+        $newchecks[] = new report_securityaudit\check\vulnerabilities_db();
+    };
+
+
+    return $newchecks;
 }
 
 /**

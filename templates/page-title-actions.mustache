@@ -5,4 +5,11 @@
         </span>
         {{#str}}formlmswitaibtn, report_securityaudit, {{release}}{{/str}}
     </button>
+
+    {{#setting}}
+    <button onclick="window.location.href='{{url}}';" type="button" data-bs-toggle="tooltip" title="{{#str}}setting, report_securityaudit{{/str}}" data-bs-placement="bottom" class="btn-shadow me-3 btn btn-dark">
+        <i class="fa fa-gear"></i>
+    </button>
+    {{/setting}}
+
 </div>

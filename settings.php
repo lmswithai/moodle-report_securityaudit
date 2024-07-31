@@ -18,14 +18,19 @@
  * Settings and links
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die;
 
+if ($ADMIN->fulltree) {
+
+    $settings->add(new admin_setting_heading('report_securityaudit/settings', '', ''));
+    $settings->add(new admin_setting_configcheckbox('report_securityaudit/checkw2a',
+                    get_string('checkw2a', 'report_securityaudit'),
+                    get_string('checkw2a_desc', 'report_securityaudit'), 1));
+}
+
 $ADMIN->add('reports', new admin_externalpage('reportsecurityaudit_report', get_string('securityaudit', 'report_securityaudit'),
 "$CFG->wwwroot/report/securityaudit/index.php", 'report/securityaudit:view'));
-
-// No report settings.
-$settings = null;

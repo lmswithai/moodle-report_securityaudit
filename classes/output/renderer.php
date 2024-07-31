@@ -18,8 +18,8 @@
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\output;
@@ -29,8 +29,8 @@ use plugin_renderer_base;
 /**
  * The renderer for the report securityaudit.
  *
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
     /**

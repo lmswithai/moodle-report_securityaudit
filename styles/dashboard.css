@@ -30165,3 +30165,8 @@ A VERTICAL event
 .securityaudit-dashboard .widget-content .widget-content-left .widget-subheading {
   opacity: 1;
 }
+
+.modal-open .widget-content-left td {
+  border-bottom-width: 1px;
+  border-color: #dcdcdc;
+}

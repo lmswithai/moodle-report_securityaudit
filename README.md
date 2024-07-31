@@ -9,11 +9,11 @@ The report is an extension of the security report, displaying only the problemat
 
 Developed
 ===========================
-LMSwithAI
+When2Update
 
 Moodle profile: https://moodle.org/user/profile.php?id=3286395
 
-Website: https://lmswithai.com/
+Website: https://when2update.com/
 
 Installation
 ------------

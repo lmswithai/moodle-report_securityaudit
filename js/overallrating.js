@@ -2,7 +2,7 @@
  * Display chart overallrating.
  *
  * @module     report_securityaudit/overallrating
- * @copyright  2024, LMSwithAI <contact@lmswithai.com>
+ * @copyright  2024, when2update.com <consultations@when2update.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

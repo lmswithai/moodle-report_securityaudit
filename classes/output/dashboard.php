@@ -18,8 +18,8 @@
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\output;
@@ -35,8 +35,8 @@ use stdClass;
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dashboard implements renderable, templatable {
 
@@ -170,35 +170,44 @@ class dashboard implements renderable, templatable {
      */
     private function load_module() {
         return [
-            'envirolment' => ['core_displayerrors',
+            'envirolment' => [
+                'core_displayerrors',
                 'core_unsecuredataroot',
                 'core_publicpaths',
                 'core_configrw',
                 'core_preventexecpath'],
-            'accessoutside' => ['core_openprofiles',
+            'accessoutside' => [
+                'core_openprofiles',
                 'core_crawlers',
                 'report_securityaudit_debug',
                 'report_securityaudit_debugdisplay'],
-            'gdpr' => ['core_passwordpolicy',
+            'gdpr' => [
+                'core_passwordpolicy',
                 'core_emailchangeconfirmation',
                 'report_securityaudit_minpasswordlength',
                 'report_securityaudit_passwordexpiration'],
-            'security' => ['core_cookiesecure',
+            'security' => [
+                'core_cookiesecure',
                 'auth_none_noauth',
                 'report_securityaudit_enablewebservices',
                 'report_securityaudit_cookiesecure',
-                'report_securityaudit_vulnerabilities',
                 'report_securityaudit_cron',
                 'core_embed',
                 'core_webcron'],
-            'usersaccount' => ['core_riskadmin',
+            'usersaccount' => [
+                'core_riskadmin',
                 'core_riskxss',
                 'core_defaultuserrole',
                 'core_guestrole',
                 'core_frontpagerole',
                 'report_securityaudit_guestloginbutton'],
-            'backups' => ['core_riskbackup',
+            'backups' => [
+                'core_riskbackup',
             'report_securityaudit_backup_auto_active'],
+            'vulnerabilities' => [
+                'report_securityaudit_vulnerabilities_moodle',
+                'report_securityaudit_vulnerabilities_php',
+                'report_securityaudit_vulnerabilities_db'],
         ];
     }
 
@@ -224,7 +233,7 @@ class dashboard implements renderable, templatable {
     }
 
     /**
-     * Szablon pustej kategorii.
+     * Category wireframe.
      *
      * @param  string $category - Category ref.
      * @return array category frame.
@@ -249,6 +258,9 @@ class dashboard implements renderable, templatable {
                 break;
             case 'backups':
                 $icon = 'fa-box-archive';
+                break;
+            case 'vulnerabilities':
+                $icon = 'fa-bug';
                 break;
             default:
                 $icon = 'fa-bars';
@@ -276,15 +288,16 @@ class dashboard implements renderable, templatable {
     }
 
     /**
-     * Budowanie rezultatu.
+     * Build result frame.
      *
      * @param  string $category - Category ref.
+     * @param  result $result - Check data.
      * @return array restuly frame.
      */
-    private function build_check($check) {
+    private function build_check($check, $result) {
 
         $ref = $check->get_ref();
-        $result = $this->get_result_translation($check->get_result());
+        $result = $this->get_result_translation($result);
 
         return [
             'status'    => $result,
@@ -295,16 +308,16 @@ class dashboard implements renderable, templatable {
     }
 
     /**
-     * Budowanie modali
+     * Build modal window.
      *
      * @param  string $category - Category ref.
+     * @param  result $result - Check data.
      * @return array restuly frame.
      */
-    private function build_modal($check) {
+    private function build_modal($check, $result) {
 
         $ref = $check->get_ref();
         $actionlink = $check->get_action_link();
-        $result = $check->get_result();
         $summary = $result->get_summary();
         $details = $result->get_details();
         $status = $this->get_result_translation($result);
@@ -331,7 +344,7 @@ class dashboard implements renderable, templatable {
     }
 
     /**
-     * Tłumaczenie statusów.
+     * Status translate.
      *
      * @param  stdClass $category - Category ref.
      * @return array restuly frame.
@@ -363,7 +376,7 @@ class dashboard implements renderable, templatable {
 
 
     /**
-     * Budowa kategorii.
+     * Create category.
      *
      * @return void
      */
@@ -396,10 +409,10 @@ class dashboard implements renderable, templatable {
                     $report[$category][$status]++;
                 }
 
-                $report[$category]['checks'][] = $this->build_check($check);
+                $report[$category]['checks'][] = $this->build_check($check, $result);
             }
 
-            $this->modal[] = $this->build_modal($check);
+            $this->modal[] = $this->build_modal($check, $result);
         }
 
         return $report;
@@ -407,7 +420,7 @@ class dashboard implements renderable, templatable {
     }
 
     /**
-     * Obliczenie podsumowania.
+     * Summary counter.
      *
      * @param  array $modules
      * @return array $modules
@@ -425,7 +438,7 @@ class dashboard implements renderable, templatable {
     }
 
     /**
-     * Ustawienie koloru błędów danej sekcji.
+     * Set bug color in section.
      *
      * @param  array $modules
      * @return array $modules
@@ -492,6 +505,11 @@ class dashboard implements renderable, templatable {
         $data->base['title'] = $this->title;
         $data->base['headcss'] = $this->load_css();
         $data->base['headjs'] = $this->load_js();
+
+        $setturl = new \moodle_url('/admin/settings.php?section=reportsecurityaudit');
+        $data->setting = [
+                'url' => $setturl
+        ];
 
         $pluginmanager = \core_plugin_manager::instance();
         $release = $pluginmanager->get_plugin_info('report_securityaudit')->release;

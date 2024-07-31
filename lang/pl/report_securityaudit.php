@@ -18,7 +18,7 @@
  * Plugin strings are defined here.
  *
  * @package     report_securityaudit
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
+ * @copyright   2024, when2update.com <consultations@when2update.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -102,3 +102,33 @@ $string['other'] = 'Reszta';
 $string['quantity'] = 'Liczba';
 $string['formlmswitaibtn'] = 'Zgłoś błąd / prośbę o pomoc / nową funkcjonalność';
 $string['securityaudit:view'] = 'Pokaż raport audytu zabezpieczeń';
+$string['vulnerabilities'] = 'Luki bezpieczeństwa w oprogramowaniu';
+$string['checkvulnerabilities'] = 'Znane podatności';
+$string['vulnerabilitie'] = 'Podatność';
+$string['cve'] = 'CVE';
+
+$string['checkvulnerabilities_moodle'] = 'Bezpieczeństwo Moodle';
+$string['check_vuls_error_moodle'] = 'Błąd odczytu wersjie Moodle. Zgłoś do autora wtyczki.';
+$string['check_vuls_nosupporterror_moodle'] = 'Ta wersja Moodle nie ma już wsparcia bezpieczeństwa, zaleca się aktualizację do nowszej wersji.';
+$string['check_vuls_founderror_moodle'] = 'Znaleziono <span class="badge badge-pill bg-danger">{$a}</span> luk bezpieczeństwa w tej wersji Moodle.';
+$string['check_vuls_ok_moodle'] = 'W tej chwili nie zgłoszono żadnych luk w zabezpieczeniach tej wersji Moodle.';
+$string['check_vuls_details_moodle'] = '<h2>Znaleziono luki:</h2>';
+$string['check_vuls_unknown_moodle'] = 'Nie udało się nawiązać połączenia z serwerem analiz. Możesz to zrobić ręcznie na naszej stronie <a target="_blank" href="https://when2update.com">when2update.com</a>';
+
+$string['checkvulnerabilities_php'] = 'Bezpieczeństwo PHP';
+$string['check_vuls_error_php'] = 'Błąd odczytu wersjie PHP. Zgłoś do autora wtyczki.';
+$string['check_vuls_nosupporterror_php'] = 'Ta wersja PHP nie ma już wsparcia bezpieczeństwa, zaleca się aktualizację do nowszej wersji.';
+$string['check_vuls_founderror_php'] = 'Znaleziono <span class="badge badge-pill bg-danger">{$a}</span> luk bezpieczeństwa w tej wersji PHP.';
+$string['check_vuls_ok_php'] = 'W tej chwili nie zgłoszono żadnych luk w zabezpieczeniach tej wersji PHP.';
+$string['check_vuls_unknown_php'] = 'Nie udało się nawiązać połączenia z serwerem analiz. Możesz to zrobić ręcznie na naszej stronie <a target="_blank" href="https://when2update.com">when2update.com</a>';
+
+$string['checkvulnerabilities_db'] = 'Bezpieczeństwo bazy danych';
+$string['check_vuls_error_db'] = 'Błąd odczytu wersjie bazy danych. Zgłoś do autora wtyczki.';
+$string['check_vuls_nosupporterror_db'] = 'Ta wersja PHP nie ma już wsparcia bezpieczeństwa, zaleca się aktualizację do nowszej wersji.';
+$string['check_vuls_founderror_db'] = 'Znaleziono <span class="badge badge-pill bg-danger">{$a}</span> luk bezpieczeństwa w tej wersji bazy danych.';
+$string['check_vuls_ok_db'] = 'W tej chwili nie zgłoszono żadnych luk w zabezpieczeniach tej wersji bazy danych.';
+$string['check_vuls_unknown_db'] = 'Nie udało się nawiązać połączenia z serwerem analiz. Możesz to zrobić ręcznie na naszej stronie <a target="_blank" href="https://when2update.com">when2update.com</a>';
+
+$string['checkw2a'] = 'Zdalne sprawdzenie luk';
+$string['checkw2a_desc'] = 'Sprawdzaj luki oprogramowania z wykorzystaniem <a href="https://czyaktualizowac.pl" target="_blank">czyaktualizowac.pl</a> (może wydłużyć czas wczytywanie raportu ze względu na komunikację z serwerem zewnętrznym).';
+$string['setting'] = 'Ustawienia';

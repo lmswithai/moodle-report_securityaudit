@@ -174,15 +174,18 @@
                             {{/ backups}}
                             </div>
                         </div>
-
-                        {{# notassigned}}
                         <div class="row">
                             <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2s">
+                            {{# vulnerabilities}}
                                 {{> report_securityaudit/module }}
-
+                            {{/ vulnerabilities}}
                             </div>
+                            {{# notassigned}}
+                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2250ms">
+                                {{> report_securityaudit/module }}
+                            </div>
+                            {{/ notassigned}}
                         </div>
-                        {{/ notassigned}}
                         {{/ modules }}
                 </div>
             </div>
