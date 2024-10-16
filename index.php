@@ -28,14 +28,23 @@ require('../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->dirroot.'/report/securityaudit/lib.php');
 
+$getdbvul = optional_param('dbvul', false, PARAM_BOOL);
+$getphpvul = optional_param('phpvul', false, PARAM_BOOL);
+$getmdlvul = optional_param('mdlvul', false, PARAM_BOOL);
+
 admin_externalpage_setup('reportsecurity', '', null, '', ['pagelayout' => 'report']);
 
-$detail = optional_param('detail', '', PARAM_TEXT); // Show detailed info about one check only.
+$sitecontext = context_system::instance();
 
+$PAGE->set_context($sitecontext);
 $url = '/report/securityaudit/index.php';
+$PAGE->set_url($url, ['dbvul' => $getdbvul, 'phpvul' => $getphpvul, 'mdlvul' => $getmdlvul]);
+$PAGE->set_pagelayout('embedded');
+
+$detail = optional_param('detail', '', PARAM_TEXT);
+
 $output = $PAGE->get_renderer('report_securityaudit');
 
-$PAGE->set_pagelayout('embedded');
 $PAGE->blocks->show_only_fake_blocks();
 
 $dashboard = new \report_securityaudit\output\dashboard('security', $url, $detail);
@@ -45,6 +54,9 @@ if (!empty($table->detail)) {
     $PAGE->navbar->add($table->detail->get_name());
 }
 
-$dashboard->set_title(get_string('securityaudit', 'report_securityaudit'));
+$pluginmanager = \core_plugin_manager::instance();
+$release = $pluginmanager->get_plugin_info('report_securityaudit')->release;
+
+$dashboard->set_title(get_string('securityaudit', 'report_securityaudit') . ' ' . $release, 'pe-7s-graph2');
 // Render.
 echo $output->render($dashboard);

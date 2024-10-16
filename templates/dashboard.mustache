@@ -31,162 +31,166 @@
     </head>
     <body>
         <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+            {{> report_securityaudit/dashboard_header }}
             <div class="app-main">
-                {{> report_securityaudit/dashboard_header }}
-                    <div class="securityaudit-dashboard">
-                        {{> report_securityaudit/page-title }}
-                        <div class="row">
-                            <div class="col-md-6 col-xl-8 mb-3">
-                            {{# summary }}
-                                {{! Krytyczne }}
-                                <div class="card mb-2 widget-content bg-danger">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
-                                                <i class="fa fa-fire icon-gradient bg-heavy-rain fa-2x"> </i>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">{{#str}}critical,  report_securityaudit{{/str}}</div>
-                                            <div class="widget-subheading">{{#str}}critical_desc,  report_securityaudit{{/str}}</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span id="summary-critical">0</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{! Średnie }}
-                                <div class="card mb-2 widget-content bg-warning">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
-                                                <i class="fa fa-triangle-exclamation icon-gradient bg-heavy-rain fa-2x"> </i>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">{{#str}}moderate,  report_securityaudit{{/str}}</div>
-                                            <div class="widget-subheading">{{#str}}moderate_desc,  report_securityaudit{{/str}}</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span id="summary-moderate">0</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{! Prawidłowo }}
-                                <div class="card mb-2 widget-content bg-success">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
-                                                <i class="fa fa-circle-check icon-gradient bg-heavy-rain fa-2x"> </i>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">{{#str}}normal,  report_securityaudit{{/str}}</div>
-                                            <div class="widget-subheading">{{#str}}normal_desc,  report_securityaudit{{/str}}</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span id="summary-normal">0</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{! Informacje }}
-                                <div class="card mb-2 widget-content bg-info">
-                                    <div class="widget-content-wrapper text-white">
-                                        <div class="widget-content-left">
-                                            <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
-                                                <i class="fa fa-circle-info icon-gradient bg-heavy-rain fa-2x"> </i>
-                                            </div>
-                                        </div>
-                                        <div class="widget-content-left">
-                                            <div class="widget-heading">{{#str}}info,  report_securityaudit{{/str}}</div>
-                                            <div class="widget-subheading">{{#str}}info_desc,  report_securityaudit{{/str}}</div>
-                                        </div>
-                                        <div class="widget-content-right">
-                                            <div class="widget-numbers text-white"><span id="summary-info">0</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            {{/ summary }}
-                            </div>
-
-                            <div class="col-md-6 col-xl-4 mb-3">
-
-                                {{! Ogólna ocena }}
-                                <div class="card" style="height: calc(100% - 0.5rem);">
-                                    <div class="card-header-tab card-header">
-                                        <div class="card-header-title">
-                                            <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
-                                            {{#str}}overallmodule, report_securityaudit{{/str}}
-                                        </div>
-                                    </div>
-                                    <div class="tab-content">
-                                            <div class="tab-pane fade active show" id="tab-eg-55">
-                                                <div class="widget-chart p-3">
-                                                    <div style="height: 260px">
-                                                        <canvas id="overall-rating"></canvas>
-                                                    <div class="widget-chart-content text-center mt-5">
-                                                    </div>
+                {{> report_securityaudit/sidebar }}
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                            {{> report_securityaudit/page-title }}
+                            <div class="row">
+                                <div class="col-md-6 col-xl-8 mb-3">
+                                {{# summary }}
+                                    {{! Krytyczne }}
+                                    <div class="card mb-2 widget-content bg-danger">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left">
+                                                <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                    <i class="fa fa-fire icon-gradient bg-heavy-rain fa-2x"> </i>
                                                 </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">{{#str}}critical,  report_securityaudit{{/str}}</div>
+                                                <div class="widget-subheading">{{#str}}critical_desc,  report_securityaudit{{/str}}</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white"><span id="summary-critical">0</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    {{! Średnie }}
+                                    <div class="card mb-2 widget-content bg-warning">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left">
+                                                <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                    <i class="fa fa-triangle-exclamation icon-gradient bg-heavy-rain fa-2x"> </i>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">{{#str}}moderate,  report_securityaudit{{/str}}</div>
+                                                <div class="widget-subheading">{{#str}}moderate_desc,  report_securityaudit{{/str}}</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white"><span id="summary-moderate">0</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{! Prawidłowo }}
+                                    <div class="card mb-2 widget-content bg-success">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left">
+                                                <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                    <i class="fa fa-circle-check icon-gradient bg-heavy-rain fa-2x"> </i>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">{{#str}}normal,  report_securityaudit{{/str}}</div>
+                                                <div class="widget-subheading">{{#str}}normal_desc,  report_securityaudit{{/str}}</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white"><span id="summary-normal">0</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{! Informacje }}
+                                    <div class="card mb-2 widget-content bg-info">
+                                        <div class="widget-content-wrapper text-white">
+                                            <div class="widget-content-left">
+                                                <div class="ui-widget-icon-block me-2" style= "min-width: 50px;">
+                                                    <i class="fa fa-circle-info icon-gradient bg-heavy-rain fa-2x"> </i>
+                                                </div>
+                                            </div>
+                                            <div class="widget-content-left">
+                                                <div class="widget-heading">{{#str}}info,  report_securityaudit{{/str}}</div>
+                                                <div class="widget-subheading">{{#str}}info_desc,  report_securityaudit{{/str}}</div>
+                                            </div>
+                                            <div class="widget-content-right">
+                                                <div class="widget-numbers text-white"><span id="summary-info">0</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {{/ summary }}
+                                </div>
+
+                                <div class="col-md-6 col-xl-4 mb-3">
+
+                                    {{! Ogólna ocena }}
+                                    <div class="card" style="height: calc(100% - 0.5rem);">
+                                        <div class="card-header-tab card-header">
+                                            <div class="card-header-title">
+                                                <i class="header-icon lnr-rocket icon-gradient bg-tempting-azure"> </i>
+                                                {{#str}}overallmodule, report_securityaudit{{/str}}
+                                            </div>
+                                        </div>
+                                        <div class="tab-content">
+                                                <div class="tab-pane fade active show" id="tab-eg-55">
+                                                    <div class="widget-chart p-3">
+                                                        <div style="height: 180px">
+                                                            <canvas id="overall-rating"></canvas>
+                                                        <div class="widget-chart-content text-center mt-5">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {{# modules }}
-                        <div class="row">
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-250ms">
-                            {{# envirolment}}
-                                {{> report_securityaudit/module }}
-                            {{/ envirolment}}
+                            {{# modules }}
+                            <div class="row">
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-250ms">
+                                {{# envirolment}}
+                                    {{> report_securityaudit/module }}
+                                {{/ envirolment}}
+                                </div>
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-500ms">
+                                {{# accessoutside}}
+                                    {{> report_securityaudit/module }}
+                                {{/ accessoutside}}
+                                </div>
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-750ms">
+                                {{# gdpr}}
+                                    {{> report_securityaudit/module }}
+                                {{/ gdpr}}
+                                </div>
                             </div>
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-500ms">
-                            {{# accessoutside}}
-                                {{> report_securityaudit/module }}
-                            {{/ accessoutside}}
-                            </div>
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-750ms">
-                            {{# gdpr}}
-                                {{> report_securityaudit/module }}
-                            {{/ gdpr}}
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1250ms">
-                            {{# security}}
-                                {{> report_securityaudit/module }}
-                            {{/ security}}
+                            <div class="row">
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1250ms">
+                                {{# security}}
+                                    {{> report_securityaudit/module }}
+                                {{/ security}}
+                                </div>
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1500ms">
+                                {{# vulnerabilities}}
+                                    {{> report_securityaudit/module }}
+                                {{/ vulnerabilities}}
+
+                                </div>
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1750ms">
+                                {{# backups}}
+                                    {{> report_securityaudit/module }}
+                                {{/ backups}}
+                                </div>
                             </div>
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1500ms">
-                            {{# usersaccount}}
-                                {{> report_securityaudit/module }}
-                            {{/ usersaccount}}
+                            <div class="row">
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2s">
+                                {{# usersaccount}}
+                                    {{> report_securityaudit/module }}
+                                {{/ usersaccount}}
+                                </div>
+                                {{# notassigned}}
+                                <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2250ms">
+                                    {{> report_securityaudit/module }}
+                                </div>
+                                {{/ notassigned}}
                             </div>
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-1750ms">
-                            {{# backups}}
-                                {{> report_securityaudit/module }}
-                            {{/ backups}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2s">
-                            {{# vulnerabilities}}
-                                {{> report_securityaudit/module }}
-                            {{/ vulnerabilities}}
-                            </div>
-                            {{# notassigned}}
-                            <div class="col-md-6 col-xl-4 animate__animated animate__fadeInUp animate__delay-2250ms">
-                                {{> report_securityaudit/module }}
-                            </div>
-                            {{/ notassigned}}
-                        </div>
-                        {{/ modules }}
+                            {{/ modules }}
+                    </div>
                 </div>
             </div>
         </div>

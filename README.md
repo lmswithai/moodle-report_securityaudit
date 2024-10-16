@@ -1,6 +1,6 @@
-# Report security audit
+# NIS2 and GDPR Security Audit Report
 
-![screenshot](pix/screen1.png "Report security audit Screenshot")
+![screenshot](pix/screen1.png "NIS2 and GDPR Security Audit Report")
 
 ---------
 

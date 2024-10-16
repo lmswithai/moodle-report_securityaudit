@@ -25,6 +25,8 @@
 namespace report_securityaudit\output;
 
 use plugin_renderer_base;
+use html_writer;
+use moodle_url;
 
 /**
  * The renderer for the report securityaudit.
@@ -33,16 +35,118 @@ use plugin_renderer_base;
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
-    /**
-     * Defer to template.
-     *
-     * @param index_page $page
-     *
-     * @return string html for the page
-     */
-    public function render_index_page($page): string {
-        $data = $page->export_for_template($this);
 
-        return parent::render_from_template('report_securityaudit/dashboard', $data);
+    /**
+     * Retunr favicon.
+     *
+     * @return void
+     */
+    public function favicon() {
+        return new \moodle_url('/report/securityaudit/pix/favicon.ico');
     }
+
+    public function load_render_base_data($data) {
+        global $SITE, $CFG;
+
+        $sitename = format_string($SITE->fullname);
+        $backtomdl = new \moodle_url('/admin/search.php#linkreports');
+
+        $data->build = format_string($CFG->release);
+        $data->sitename = $sitename;
+        $data->backurl = $backtomdl->out();
+
+        return $data;
+
+    }
+
+    /**
+     * Load all js library.
+     *
+     * @return array library links.
+     */
+    public function load_js() {
+
+        $output = [];
+
+        $jss = [
+        'jquery-3.7.1.min.js' => false,
+        'base.js' => false,
+        'bootstrap.bundle.min.js' => false,
+        'chart.umd.js' => false,
+        'countUp.umd.js' => false,
+        'toastr.min.js' => false];
+
+        foreach ($jss as $js => $module) {
+
+            $jshref = new moodle_url('/report/securityaudit/js/' . $js);
+            $output[] = ['url' => $jshref->out(), 'module' => $module];
+        }
+
+        return $output;
+    }
+
+    /**
+     * Load all css library.
+     *
+     * @return array library links.
+     */
+    public function load_css() {
+
+        $output = [];
+
+        $csss = ['dashboard.css', 'animate.min.css', 'animate.compat.css', 'custom.css'];
+
+        foreach ($csss as $css) {
+
+            $csshref = new moodle_url('/report/securityaudit/styles/' . $css);
+            $output[] = ['url' => $csshref->out()];
+        }
+
+        return $output;
+    }
+
+
+    public function sidebar_elements($element) {
+
+        $sidebar = [
+            [
+                'icon' => 'pe-7s-display1',
+                'title' =>  get_string('securityaudit', 'report_securityaudit'),
+                'url' => new moodle_url('/report/securityaudit/index.php'),
+                'active' => false
+            ],
+            [
+                'icon' => 'pe-7s-door-lock',
+                'title' =>  get_string('requirementsnistwo', 'report_securityaudit'),
+                'url' => new moodle_url('/report/securityaudit/nis.php'),
+                'active' => false
+            ],
+            [
+                'icon' => 'pe-7s-graph2',
+                'title' =>  get_string('monitoring', 'report_securityaudit'),
+                'url' => new moodle_url('/report/securityaudit/monitor.php'),
+                'active' => false
+            ]
+        ];
+
+        if ($element) {
+
+            switch ($element) {
+                case 'dashboard':
+                    $element = 0;
+                    break;
+                case 'nis':
+                    $element = 1;
+                    break;
+                case 'monitor':
+                    $element = 2;
+                    break;
+            }
+
+            $sidebar[$element]['active'] = true;
+        }
+
+        return $sidebar;
+    }
+
 }

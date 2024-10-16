@@ -71,6 +71,12 @@ class dashboard implements renderable, templatable {
 
 
     /**
+     * @var string $icon page icon
+     */
+    protected $icon = '';
+
+
+    /**
      * __construct.
      *
      * @param  string $type
@@ -114,53 +120,9 @@ class dashboard implements renderable, templatable {
      * @param  string title.
      * @return string title.
      */
-    public function set_title($string) {
+    public function set_title($string, $icon) {
         $this->title = $string;
-    }
-
-    /**
-     * Load all js library.
-     *
-     * @return array library links.
-     */
-    private function load_js() {
-
-        $output = [];
-
-        $jss = [
-        'jquery-3.7.1.min.js' => false,
-        'bootstrap.bundle.min.js' => false,
-        'chart.umd.js' => false,
-        'countUp.umd.js' => false,
-        'toastr.min.js' => false];
-
-        foreach ($jss as $js => $module) {
-
-            $jshref = new moodle_url('/report/securityaudit/js/' . $js);
-            $output[] = ['url' => $jshref->out(), 'module' => $module];
-        }
-
-        return $output;
-    }
-
-    /**
-     * Load all css library.
-     *
-     * @return array library links.
-     */
-    private function load_css() {
-
-        $output = [];
-
-        $csss = ['dashboard.css', 'animate.min.css', 'animate.compat.css'];
-
-        foreach ($csss as $css) {
-
-            $csshref = new moodle_url('/report/securityaudit/styles/' . $css);
-            $output[] = ['url' => $csshref->out()];
-        }
-
-        return $output;
+        $this->icon = $icon;
     }
 
     /**
@@ -169,7 +131,9 @@ class dashboard implements renderable, templatable {
      * @return array.
      */
     private function load_module() {
-        return [
+        global $CFG;
+
+        $module =  [
             'envirolment' => [
                 'core_displayerrors',
                 'core_unsecuredataroot',
@@ -193,7 +157,8 @@ class dashboard implements renderable, templatable {
                 'report_securityaudit_cookiesecure',
                 'report_securityaudit_cron',
                 'core_embed',
-                'core_webcron'],
+                'core_webcron',
+                'report_securityaudit_cleantext'],
             'usersaccount' => [
                 'core_riskadmin',
                 'core_riskxss',
@@ -203,12 +168,19 @@ class dashboard implements renderable, templatable {
                 'report_securityaudit_guestloginbutton'],
             'backups' => [
                 'core_riskbackup',
-            'report_securityaudit_backup_auto_active'],
+                'report_securityaudit_backup_auto_active'],
             'vulnerabilities' => [
                 'report_securityaudit_vulnerabilities_moodle',
                 'report_securityaudit_vulnerabilities_php',
                 'report_securityaudit_vulnerabilities_db'],
         ];
+
+        // 4.3 MFA.
+        if ($CFG->version >= 2023100900) {
+            $module['usersaccount'][] = 'report_securityaudit_adminhasmfa';
+        };
+
+        return $module;
     }
 
     /**
@@ -282,6 +254,7 @@ class dashboard implements renderable, templatable {
             'critical'      => 0,
             'moderate'      => 0,
             'info'          => 0,
+            'unknown'          => 0,
             'normal'        => 0,
             'checks'        => [],
         ];
@@ -295,15 +268,32 @@ class dashboard implements renderable, templatable {
      * @return array restuly frame.
      */
     private function build_check($check, $result) {
+        global $PAGE;
 
         $ref = $check->get_ref();
         $result = $this->get_result_translation($result);
 
+        switch ($ref) {
+            case 'report_securityaudit_vulnerabilities_php':
+                $button = ['downloadurl' => new moodle_url($PAGE->url, ['phpvul' => true])];
+                break;
+            case 'report_securityaudit_vulnerabilities_moodle':
+                $button = ['downloadurl' => new moodle_url($PAGE->url, ['mdlvul' => true])];
+                break;
+            case 'report_securityaudit_vulnerabilities_db':
+                $button = ['downloadurl' => new moodle_url($PAGE->url, ['dbvul' => true])];
+                break;
+                default:
+                $button = '';
+                break;
+        }
+
         return [
-            'status'    => $result,
-            'statusname'    => get_string($result, 'report_securityaudit'),
-            'name'      => $check->get_name(),
-            'databstarget'   => 'checkdetails_' . $ref,
+            'status'            => $result,
+            'statusname'        => get_string($result, 'report_securityaudit'),
+            'name'              => $check->get_name(),
+            'downloaddata'      => $button,
+            'databstarget'      => 'checkdetails_' . $ref,
         ];
     }
 
@@ -403,7 +393,7 @@ class dashboard implements renderable, templatable {
             } else {
                 $report[$category]['failed']++;
 
-                $acceprstatus = ['critical', 'moderate', 'info', 'normal'];
+                $acceprstatus = ['critical', 'moderate', 'info', 'normal', 'unknown'];
                 $status = $this->get_result_translation($result);
                 if (in_array($status, $acceprstatus)) {
                     $report[$category][$status]++;
@@ -427,7 +417,7 @@ class dashboard implements renderable, templatable {
      */
     private function summary_status($modules) {
 
-        $acceprstatus = ['critical' => 0, 'moderate' => 0, 'info' => 0, 'normal' => 0];
+        $acceprstatus = ['critical' => 0, 'moderate' => 0, 'info' => 0, 'normal' => 0, 'unknown' => 0];
 
         foreach ($modules as $module) {
             foreach ($acceprstatus as $key => $value) {
@@ -452,6 +442,8 @@ class dashboard implements renderable, templatable {
                 $modules[$moduleid]['failedcolor'] = 'bg-warning';
             } else if ($module['info'] > 0) {
                 $modules[$moduleid]['failedcolor'] = 'bg-info';
+            } else if ($module['unknown'] > 0) {
+                $modules[$moduleid]['failedcolor'] = 'bg-premium-dark';
             }
         }
         return $modules;
@@ -463,23 +455,20 @@ class dashboard implements renderable, templatable {
      * @return stdClass
      */
     public function export_for_template(renderer_base $output): stdClass {
-        global $SITE, $CFG;
+        global $PAGE;
+
+        $renderer = $PAGE->get_renderer('report_securityaudit');
+        $data = new stdClass();
 
         $modules = $this->build_report();
         $modules = $this->color_section($modules);
         $summary = $this->summary_status($modules);
-
-        $sitename = format_string($SITE->fullname);
-        $backtomdl = new \moodle_url('/admin/search.php#linkreports');
         $timecheck = userdate(time(), get_string('strftimedatetimeshort'));
 
-        $data = new stdClass();
-        $data->build = format_string($CFG->release);
-        $data->sitename = $sitename;
-        $data->timecheck = $timecheck;
-        $data->backurl = $backtomdl->out();
+        $data = $renderer->load_render_base_data($data);
         $data->modules = $modules;
         $data->summary = $summary;
+        $data->timecheck = $timecheck;
         $success = $summary['normal'];
         $other = $summary['critical'] + $summary['moderate'];
 
@@ -503,21 +492,20 @@ class dashboard implements renderable, templatable {
         ];
         $data->modal = $this->modal;
         $data->base['title'] = $this->title;
-        $data->base['headcss'] = $this->load_css();
-        $data->base['headjs'] = $this->load_js();
+        $data->base['headcss'] = $renderer->load_css();
+        $data->base['headjs'] = $renderer->load_js();
+
 
         $setturl = new \moodle_url('/admin/settings.php?section=reportsecurityaudit');
         $data->setting = [
                 'url' => $setturl
         ];
 
-        $pluginmanager = \core_plugin_manager::instance();
-        $release = $pluginmanager->get_plugin_info('report_securityaudit')->release;
-        if ($release) {
-            $data->release = $release;
-        }
+        $data->favicon = $renderer->favicon();
+        $data->sidebar = $renderer->sidebar_elements('dashboard');
 
-        $data->favicon = new \moodle_url('/report/securityaudit/pix/favicon.ico');
+        $data->pagetitle = $data->base['title'];
+        $data->pageicon = $this->icon;
 
         return $data;
     }

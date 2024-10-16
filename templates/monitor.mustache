@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    {{# base }}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Language" content="en">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="shortcut icon" href="{{{favicon}}}" type="image/x-icon">
+        <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <meta name="msapplication-tap-highlight" content="no">
+        {{# headjs }}
+            <script {{#module}}type="module"{{/module}} src="{{{url}}}"></script>
+        {{/ headjs }}
+        {{# headcss }}
+                <link href="{{{url}}}" rel="stylesheet">
+        {{/ headcss }}
+
+        <!--
+        =========================================================
+        * ArchitectUI HTML Theme Dashboard - v4.0.0
+        =========================================================
+        * Product Page: https://dashboardpack.com
+        * Copyright 2023 DashboardPack (https://dashboardpack.com)
+        * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+        =========================================================
+        * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+        -->
+    {{/ base }}
+    </head>
+    <body>
+        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+            {{> report_securityaudit/dashboard_header }}
+            <div class="app-main">
+                {{> report_securityaudit/sidebar }}
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                        {{> report_securityaudit/page-title }}
+
+                        {{#loginternal}}
+                        <div class="alert alert-danger" role="alert">
+                        {{#str}}nointernallogerror, report_securityaudit{{/str}}
+                        </div>
+                        {{/loginternal}}
+
+                        <div class="alert alert-info" role="alert">
+                        {{#str}}monitorcronlog, report_securityaudit{{/str}}
+                        </div>
+
+                        <div class="tab-content">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="mb-3 card">
+                                        <div class="card-header-tab card-header-tab-animation card-header">
+                                                <div class="card-header-title">
+                                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                                    {{#str}}monitor_title_failureslogin, report_securityaudit{{/str}}
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="chart-container">
+                                                    {{#failuresloginshow}}
+                                                    <canvas id="line-chart"></canvas>
+                                                    {{/failuresloginshow}}
+                                                    {{^failuresloginshow}}
+                                                        <p class="text-center text-muted text-uppercase font-size-md opacity-5 fw-normal">{{#str}}nodata, report_securityaudit{{/str}}</p>
+                                                    {{/failuresloginshow}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3 card">
+                                            <div class="card-header-tab card-header-tab-animation card-header">
+                                                <div class="card-header-title">
+                                                    <i class="header-icon lnr-apartment icon-gradient bg-love-kiss"> </i>
+                                                    {{#str}}monitor_title_failureslogintop, report_securityaudit{{/str}}
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade show active" id="tabs-eg-77">
+                                                        <div class="scroll-area-sm">
+                                                            <div class="scrollbar-container">
+                                                                <ul class="rm-list-borders rm-list-borders-scroll list-group list-group-flush">
+                                                                    {{#failureslogintop}}
+                                                                    <li class="list-group-item">
+                                                                        <div class="widget-content p-0">
+                                                                            <div class="widget-content-wrapper">
+                                                                                <div class="widget-content-left">
+                                                                                    <div class="widget-heading">{{fullname}}</div>
+                                                                                    <div class="widget-subheading">
+                                                                                        <small>
+                                                                                            <a href="{{{logurl}}}" target="_blank" type="button" >
+                                                                                                <i class="fa fa-fw" aria-hidden="true"></i>
+                                                                                                    {{#str}}checklogs, report_securityaudit{{/str}}
+                                                                                            </a>
+                                                                                        </small>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="widget-content-right">
+                                                                                    <div class="font-size-xlg text-muted" data-bs-toggle="tooltip" title="{{#str}}tooltipfaillogs, report_securityaudit{{/str}}">
+                                                                                        <small class="text-danger ps-2">
+                                                                                            <i class="fa fa-lock"></i>
+                                                                                        </small>
+                                                                                        <span>{{failedlogin}}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    {{/failureslogintop}}
+                                                                    {{^failureslogintop}}
+                                                                        <p class="text-center text-muted text-uppercase font-size-md opacity-5 fw-normal">{{#str}}nodata, report_securityaudit{{/str}}</p>
+                                                                    {{/failureslogintop}}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {{> report_securityaudit/components/footer }}
+
+        {{# failureslogin }}
+            <script>var datafailureslogin = JSON.parse('{{{datafailureslogin}}}');</script>
+            <script>var stringsfailureslogin = JSON.parse('{{{strings}}}');</script>
+            <script src="{{url}}"></script>
+        {{/ failureslogin }}
+
+        <script>
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        </script>
+
+    </body>
+</html>

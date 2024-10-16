@@ -12209,9 +12209,7 @@ button,
   transition: width 0.2s;
 }
 .app-header__logo .logo-src {
-  height: 23px;
-  width: 97px;
-  background: url("utils/images/logo-inverse.png");
+
 }
 
 .app-header__menu,
@@ -15352,7 +15350,6 @@ a.avatar-icon-wrapper:hover .avatar-icon {
 .card-header.card-header-tab .card-header-title {
   display: flex;
   align-items: center;
-  white-space: nowrap;
 }
 .card-header .header-icon {
   font-size: 1.65rem;
@@ -15938,7 +15935,7 @@ legend {
 }
 
 .widget-content {
-  padding: 1rem;
+  padding: 0.1rem 1rem;
   flex-direction: row;
   align-items: center;
 }

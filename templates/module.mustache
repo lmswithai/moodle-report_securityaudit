@@ -1,7 +1,7 @@
 <div class="main-card mb-3 card">
     <div class="card-header">
         <div class="font-icon-md me-2">
-            <i class="fa {{ icon }} icon-gradient bg-happy-itmeo pe-2"> </i>
+            <i class="fa {{ icon }} icon-gradient bg-midnight-bloom pe-2"> </i>
         </div>
         {{name}}
         <div class="btn-actions-pane-right">
@@ -32,6 +32,9 @@
                 </td>
                 <td> {{{ name }}} </td>
                 <td class="text-center">
+                    {{#downloaddata}}
+                    <a href="{{{downloadurl}}}" type="button" class="btn btn-success btn-sm checkbtn" data-bs-toggle="tooltip" data-bs-original-title="{{#str}} tooltipcheckbtn, report_securityaudit {{/str}}">{{#str}} check {{/str}}</a>
+                    {{/downloaddata}}
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target=".{{databstarget}}">{{#str}} details {{/str}}</button>
                 </td>
             </tr>

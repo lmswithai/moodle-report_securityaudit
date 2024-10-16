@@ -55,63 +55,73 @@ class vulnerabilities_php extends \core\check\check {
     public function get_result(): result {
         global $CFG;
 
-        // Get the PHP version.
-        $version = '';
-        require_once($CFG->libdir.'/environmentlib.php');
-        require("$CFG->dirroot/version.php");       // defines $version, $release, $branch and $maturity
+        $getphpvul = optional_param('phpvul', false, PARAM_BOOL);
 
-        list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+        if ($getphpvul) {
 
-        if ($envstatus) {
-            foreach ($environment_results as $environment_result) {
-                $type = $environment_result->getPart();
+            // Get the PHP version.
+            $version = '';
+            $summaryvunl = 0;
+            require_once($CFG->libdir.'/environmentlib.php');
+            require("$CFG->dirroot/version.php");       // defines $version, $release, $branch and $maturity
 
-                if ($type == 'php') {
-                    $versionphp = $environment_result->getCurrentVersion();
-                    break;
+            list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+
+            if ($envstatus) {
+                foreach ($environment_results as $environment_result) {
+                    $type = $environment_result->getPart();
+
+                    if ($type == 'php') {
+                        $versionphp = $environment_result->getCurrentVersion();
+                        break;
+                    }
                 }
             }
-        }
 
-        $apicomunctation = false;
+            $apicomunctation = false;
 
-        if (preg_match('/^\d+(\.\d+)*$/', $versionphp)) {
-            $url = 'https://when2update.com/wp-json/report-securityaudit-api/v1/calculate';
-            $curl = new \curl();
-            $curl->setopt(['CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3]);
-            $response = $curl->get($url, ['type' => 'php', 'version' => $versionphp]);
-            $checkdata = json_decode($response);
-            $totalnvd = isset($checkdata->totalnvd) ? clean_param($checkdata->totalnvd, PARAM_INT) : null;
-            $needupdate = isset($checkdata->needupdate) ? clean_param($checkdata->needupdate, PARAM_BOOL) : null;
+            if (preg_match('/^\d+(\.\d+)*$/', $versionphp)) {
+                $url = 'https://when2update.com/wp-json/report-securityaudit-api/v1/calculate';
+                $curl = new \curl();
+                $curl->setopt(['CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3]);
+                $response = $curl->get($url, ['type' => 'php', 'version' => $versionphp]);
+                $checkdata = json_decode($response);
+                $totalnvd = isset($checkdata->totalnvd) ? clean_param($checkdata->totalnvd, PARAM_INT) : null;
+                $needupdate = isset($checkdata->needupdate) ? clean_param($checkdata->needupdate, PARAM_BOOL) : null;
 
-            if (is_int($totalnvd) && (is_int($needupdate))) {
+                if (is_int($totalnvd) && (is_int($needupdate))) {
 
-                    if ($totalnvd > 0) {
-                        $summaryvunl = $totalnvd;
-                        $status = result::ERROR;
-                        $summary = get_string('check_vuls_founderror_php', 'report_securityaudit', $summaryvunl);
-                    } else {
-
-                        if (!$needupdate) {
-                            $status = result::OK;
-                            $summary = get_string('check_vuls_ok_php', 'report_securityaudit');
-                        } else {
+                        if ($totalnvd > 0) {
+                            $summaryvunl = $totalnvd;
                             $status = result::ERROR;
-                            $summary = get_string('check_vuls_nosupporterror_php', 'report_securityaudit');
+                            $summary = get_string('check_vuls_founderror_php', 'report_securityaudit', $summaryvunl);
+                        } else {
+
+                            if (!$needupdate) {
+                                $status = result::OK;
+                                $summary = get_string('check_vuls_ok_php', 'report_securityaudit');
+                            } else {
+                                $status = result::ERROR;
+                                $summary = get_string('check_vuls_nosupporterror_php', 'report_securityaudit');
+                            }
                         }
-                    }
-                    $apicomunctation = true;
+                        $apicomunctation = true;
 
-            }
+                }
 
-            if (!$apicomunctation) {
+                if (!$apicomunctation) {
+                    $status = result::UNKNOWN;
+                    $summary = get_string('check_vuls_unknown_php', 'report_securityaudit');
+                }
+            } else {
                 $status = result::UNKNOWN;
-                $summary = get_string('check_vuls_unknown_php', 'report_securityaudit');
+                $summary = get_string('check_vuls_error_php', 'report_securityaudit');
             }
         } else {
             $status = result::UNKNOWN;
-            $summary = get_string('check_vuls_error_php', 'report_securityaudit');
+            $summary = get_string('check_vuls_getdata', 'report_securityaudit');
         }
+
 
         $details = '';
 

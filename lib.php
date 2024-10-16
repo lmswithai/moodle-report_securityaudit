@@ -29,6 +29,7 @@
  * @return array check
  */
 function report_securityaudit_securityaudit_checks() {
+    global $CFG;
 
     $newchecks = [
         new report_securityaudit\check\enablewebservices(),
@@ -39,15 +40,20 @@ function report_securityaudit_securityaudit_checks() {
         new report_securityaudit\check\minpasswordlength(),
         new report_securityaudit\check\guestloginbutton(),
         new report_securityaudit\check\backup_auto_active(),
-        new report_securityaudit\check\cron()
+        new report_securityaudit\check\cron(),
+        new report_securityaudit\check\cleantext()
     ];
 
-    if (get_config('report_securityaudit', 'checkw2a') == 1) {
+    if (get_config('report_securityaudit', 'checkw2u') == 1) {
         $newchecks[] = new report_securityaudit\check\vulnerabilities_moodle();
         $newchecks[] = new report_securityaudit\check\vulnerabilities_php();
         $newchecks[] = new report_securityaudit\check\vulnerabilities_db();
     };
 
+    // 4.3 MFA.
+    if ($CFG->version >= 2023100900) {
+        $newchecks[] = new report_securityaudit\check\adminhasmfa();
+    };
 
     return $newchecks;
 }

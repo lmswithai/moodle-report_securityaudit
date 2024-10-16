@@ -1,0 +1,13 @@
+// Fontawesome
+
+$fa-font-path: "webfonts";
+
+@import "../../../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+// You can include all the other styles the same as before
+@import "../../../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "../../../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss";
+
+.fa-2x {
+  line-height: 2;
+}

@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die;
 if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_heading('report_securityaudit/settings', '', ''));
-    $settings->add(new admin_setting_configcheckbox('report_securityaudit/checkw2a',
-                    get_string('checkw2a', 'report_securityaudit'),
-                    get_string('checkw2a_desc', 'report_securityaudit'), 1));
+    $settings->add(new admin_setting_configcheckbox('report_securityaudit/checkw2u',
+                    get_string('checkw2u', 'report_securityaudit'),
+                    get_string('checkw2u_desc', 'report_securityaudit'), 1));
 }
 
 $ADMIN->add('reports', new admin_externalpage('reportsecurityaudit_report', get_string('securityaudit', 'report_securityaudit'),

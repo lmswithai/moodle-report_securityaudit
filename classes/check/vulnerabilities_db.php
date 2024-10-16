@@ -55,74 +55,84 @@ class vulnerabilities_db extends \core\check\check {
     public function get_result(): result {
         global $CFG;
 
-        // Get the PHP version.
-        $version = '';
-        require_once($CFG->libdir.'/environmentlib.php');
-        require("$CFG->dirroot/version.php");       // defines $version, $release, $branch and $maturity
+        $getdbvul = optional_param('dbvul', false, PARAM_BOOL);
 
-        list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+        if ($getdbvul) {
 
-        if ($envstatus) {
-            foreach ($environment_results as $environment_result) {
-                $type = $environment_result->getPart();
-                if ($type == 'database') {
+            // Get the PHP version.
+            $version = '';
+            $summaryvunl = 0;
+            require_once($CFG->libdir.'/environmentlib.php');
+            require("$CFG->dirroot/version.php");       // defines $version, $release, $branch and $maturity
 
-                    $versiondb = $environment_result->getCurrentVersion();
+            list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
 
-                    $info = $environment_result->getInfo();
-                    $dbtype = 'unknown'; // Domyślna wartość, jeśli żaden z typów nie zostanie znaleziony
+            if ($envstatus) {
+                foreach ($environment_results as $environment_result) {
+                    $type = $environment_result->getPart();
+                    if ($type == 'database') {
 
-                    if (stripos($info, 'mysql') !== false) {
-                        $dbtype = 'mysql';
-                    } elseif (stripos($info, 'mariadb') !== false) {
-                        $dbtype = 'mariadb';
-                    } elseif (stripos($info, 'postgres') !== false) {
-                        $dbtype = 'postgresql';
+                        $versiondb = $environment_result->getCurrentVersion();
+
+                        $info = $environment_result->getInfo();
+                        $dbtype = 'unknown'; // Domyślna wartość, jeśli żaden z typów nie zostanie znaleziony
+
+                        if (stripos($info, 'mysql') !== false) {
+                            $dbtype = 'mysql';
+                        } elseif (stripos($info, 'mariadb') !== false) {
+                            $dbtype = 'mariadb';
+                        } elseif (stripos($info, 'postgres') !== false) {
+                            $dbtype = 'postgresql';
+                        }
+
+                        break;
                     }
-
-                    break;
                 }
             }
-        }
 
-        $apicomunctation = false;
+            $apicomunctation = false;
 
-        if (preg_match('/^\d+(\.\d+)*$/', $versiondb) && $dbtype != 'unknown') {
-            $url = 'https://when2update.com/wp-json/report-securityaudit-api/v1/calculate';
-            $curl = new \curl();
-            $curl->setopt(['CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3]);
-            $response = $curl->get($url, ['type' => $dbtype, 'version' => $versiondb]);
-            $checkdata = json_decode($response);
-            $totalnvd = isset($checkdata->totalnvd) ? clean_param($checkdata->totalnvd, PARAM_INT) : null;
-            $needupdate = isset($checkdata->needupdate) ? clean_param($checkdata->needupdate, PARAM_BOOL) : null;
+            if (preg_match('/^\d+(\.\d+)*$/', $versiondb) && $dbtype != 'unknown') {
+                $url = 'https://when2update.com/wp-json/report-securityaudit-api/v1/calculate';
+                $curl = new \curl();
+                $curl->setopt(['CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3]);
+                $response = $curl->get($url, ['type' => $dbtype, 'version' => $versiondb]);
+                $checkdata = json_decode($response);
+                $totalnvd = isset($checkdata->totalnvd) ? clean_param($checkdata->totalnvd, PARAM_INT) : null;
+                $needupdate = isset($checkdata->needupdate) ? clean_param($checkdata->needupdate, PARAM_BOOL) : null;
 
-            if (is_int($totalnvd) && (is_int($needupdate))) {
+                if (is_int($totalnvd) && (is_int($needupdate))) {
 
-                    if ($totalnvd > 0) {
-                        $summaryvunl = $totalnvd;
-                        $status = result::ERROR;
-                        $summary = get_string('check_vuls_founderror_db', 'report_securityaudit', $summaryvunl);
-                    } else {
-
-                        if (!$needupdate) {
-                            $status = result::OK;
-                            $summary = get_string('check_vuls_ok_db', 'report_securityaudit');
-                        } else {
+                        if ($totalnvd > 0) {
+                            $summaryvunl = $totalnvd;
                             $status = result::ERROR;
-                            $summary = get_string('check_vuls_nosupporterror_db', 'report_securityaudit');
+                            $summary = get_string('check_vuls_founderror_db', 'report_securityaudit', $summaryvunl);
+                        } else {
+
+                            if (!$needupdate) {
+                                $status = result::OK;
+                                $summary = get_string('check_vuls_ok_db', 'report_securityaudit');
+                            } else {
+                                $status = result::ERROR;
+                                $summary = get_string('check_vuls_nosupporterror_db', 'report_securityaudit');
+                            }
                         }
-                    }
-                    $apicomunctation = true;
+                        $apicomunctation = true;
 
-            }
+                }
 
-            if (!$apicomunctation) {
+                if (!$apicomunctation) {
+                    $status = result::UNKNOWN;
+                    $summary = get_string('check_vuls_unknown_db', 'report_securityaudit');
+                }
+            } else {
                 $status = result::UNKNOWN;
-                $summary = get_string('check_vuls_unknown_db', 'report_securityaudit');
+                $summary = get_string('check_vuls_error_db', 'report_securityaudit');
             }
+
         } else {
             $status = result::UNKNOWN;
-            $summary = get_string('check_vuls_error_db', 'report_securityaudit');
+            $summary = get_string('check_vuls_getdata', 'report_securityaudit');
         }
 
         $details = '';

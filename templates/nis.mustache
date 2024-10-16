@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    {{# base }}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Language" content="en">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="shortcut icon" href="{{{favicon}}}" type="image/x-icon">
+        <title>{{title}}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+        <meta name="msapplication-tap-highlight" content="no">
+        {{# headjs }}
+            <script {{#module}}type="module"{{/module}} src="{{{url}}}"></script>
+        {{/ headjs }}
+        {{# headcss }}
+                <link href="{{{url}}}" rel="stylesheet">
+        {{/ headcss }}
+
+        <!--
+        =========================================================
+        * ArchitectUI HTML Theme Dashboard - v4.0.0
+        =========================================================
+        * Product Page: https://dashboardpack.com
+        * Copyright 2023 DashboardPack (https://dashboardpack.com)
+        * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+        =========================================================
+        * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+        -->
+    {{/ base }}
+    </head>
+    <body>
+        <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+            {{> report_securityaudit/dashboard_header }}
+            <div class="app-main">
+                {{> report_securityaudit/sidebar }}
+                <div class="app-main__outer">
+                    <div class="app-main__inner">
+                            {{> report_securityaudit/page-title }}
+                            <div class="mb-3 card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="mb-0 table table-bordered nis-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="bg-light nis-cell-border-color nis-cell-button-border-light text-center">{{#str}}niscategory,  report_securityaudit{{/str}}</th>
+                                                    <th class="bg-light nis-cell-border-color nis-cell-button-border-light text-center">{{#str}}nisactions, report_securityaudit{{/str}}</th>
+                                                    <th class="bg-light nis-cell-border-color nis-cell-button-border-light text-center" colspan="8">{{#str}}nismethodofimplementation, report_securityaudit{{/str}}</th>
+                                                    <th class="bg-light nis-cell-border-color nis-cell-button-border-light text-center">{{#str}}nisresult, report_securityaudit{{/str}}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border"></th>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border"></td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}nisdocumentation, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}nisconfigurationbyitdepartment, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}niscollaborationwithexternalcompany, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}nissecuritytraininginlms, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}nislmsandserverupdates, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}nisantivirusforlms, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}niswafforlms, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border">{{#str}}nisenhancedmonitoringoflmsandserver, report_securityaudit{{/str}}</td>
+                                                    <td class="bg-light nis-cell-border-color fw-bold text-center nis-cell-button-border"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="nis-cell-button-border" rowspan="3">{{#str}}nissecurityauditandriskanalysis, report_securityaudit{{/str}}</th>
+                                                    <td>{{#str}}nislmssoftwareaudit, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="nis-cell-button-border" rowspan="3">{{#str}}nisauditreportidentifyingvulnerabilities, report_securityaudit{{/str}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nisriskanalysis, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="nis-cell-button-border">{{#str}}nisassessmentofserverinfrastructure, report_securityaudit{{/str}}</td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="nis-cell-button-border" rowspan="3">{{#str}}nisdevelopmentofsecuritypolicy, report_securityaudit{{/str}}</th>
+                                                    <td>{{#str}}nislmsandserversecuritypolicy, report_securityaudit{{/str}}</td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="nis-cell-button-border" rowspan="3">{{#str}}nisapprovedsecuritypolicy, report_securityaudit{{/str}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nisincidentmanagementprocedurecreation, report_securityaudit{{/str}}</td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="nis-cell-button-border">{{#str}}nispreparationofriskmanagementplan, report_securityaudit{{/str}}</td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="nis-cell-button-border" rowspan="4">{{#str}}nisserverandlmssecurityupgrades, report_securityaudit{{/str}}</th>
+                                                    <td>{{#str}}nisserverupdate, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="nis-cell-button-border" rowspan="4">{{#str}}nisupdatedstrengthenedserver, report_securityaudit{{/str}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nisdataencryption, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nisdatabasesecurity, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="nis-cell-button-border">{{#str}}nismonitoringandlogging, report_securityaudit{{/str}}</td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="nis-cell-button-border" rowspan="3">{{#str}}nistrainingofitstaffandusers, report_securityaudit{{/str}}</th>
+                                                    <td>{{#str}}nistrainingforusersoflms, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="nis-cell-button-border" rowspan="3">{{#str}}nisincreasedcybersecurityawareness, report_securityaudit{{/str}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nisincidentsimulationexercises, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="nis-cell-button-border">{{#str}}nistrainingforitteam, report_securityaudit{{/str}}</td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="nis-cell-button-border" rowspan="3">{{#str}}nissecuritytestingandnis2complianceaudit, report_securityaudit{{/str}}</th>
+                                                    <td>{{#str}}nisconductinginternalaudit, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class="nis-cell-button-border" rowspan="3">{{#str}}niscompletedauditconfirmingcompliance, report_securityaudit{{/str}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nispenetrationtesting, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="nis-cell-button-border">{{#str}}niscorrectionsandfixes, report_securityaudit{{/str}}</td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                    <td class="nis-cell-button-border"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th rowspan="4">{{#str}}nismonitoringandcontinuousimprovement, report_securityaudit{{/str}}</th>
+                                                    <td>{{#str}}niscontinuoussystemmonitoring, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td rowspan="4">{{#str}}nisfullcompliancewithnis2, report_securityaudit{{/str}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nisregularsecurityupdates, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}nissecuritypolicyreviews, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{#str}}niscollaborationwithnationalcenter, report_securityaudit{{/str}}</td>
+                                                    <td></td>
+                                                    <td><div class="font-icon-wrapper font-icon-lg"><i class="pe-7s-check icon-gradient bg-grow-early"></i></div></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {{> report_securityaudit/components/footer }}
+
+    </body>
+</html>

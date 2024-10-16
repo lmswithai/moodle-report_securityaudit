@@ -1,0 +1,71 @@
+
+@import "base";
+
+.securityaudit-dashboard {
+    padding: 30px 30px 0;
+    flex: 1;
+}
+
+// Statusty custmowe.
+.status-bg-critical {
+    @extend .bg-danger;
+}
+
+.status-bg-moderate {
+    @extend .bg-warning;
+}
+
+.status-bg-info {
+    @extend .bg-info;
+}
+
+.status-bg-normal {
+    @extend .bg-success;
+}
+
+.status-bg-unknown {
+    @extend .bg-focus;
+}
+
+// Nowe czasy animacji.
+.animate__delay-250ms {
+    animation-delay: 250ms;
+}
+
+.animate__delay-500ms {
+    animation-delay: 500ms;
+}
+
+.animate__delay-750ms {
+    animation-delay: 750ms;
+}
+
+.animate__delay-1250ms {
+    animation-delay: 1250ms;
+}
+
+.animate__delay-1500ms {
+    animation-delay: 1500ms;
+}
+
+.animate__delay-1750ms {
+    animation-delay: 1750ms;
+}
+
+.securityaudit-dashboard {
+
+    .app-page-title .reporterror {
+        font-size: 0.60rem;
+    }
+    .widget-content .widget-content-left .widget-subheading {
+        opacity: 1;
+    }
+}
+
+.modal-open {
+    .widget-content-left td {
+        border-bottom-width: 1px;
+        border-color: #dcdcdc;
+    }
+}
+

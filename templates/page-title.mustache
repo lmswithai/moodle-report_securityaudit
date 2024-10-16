@@ -2,11 +2,15 @@
     <div class="page-title-wrapper">
         <div class="page-title-heading">
             <div class="page-title-icon">
-                <i class="pe-7s-display1 icon-gradient bg-malibu-beach">
+                <i class="{{pageicon}} icon-gradient bg-malibu-beach">
                 </i>
             </div>
-            <div>{{#str}} securityaudit, report_securityaudit {{/str}} {{release}}
-            <div class="page-title-subheading">{{#str}}lastcheck, report_securityaudit{{/str}} {{timecheck}}
+            <div>{{pagetitle}}
+
+                <div class="page-title-subheading">
+                {{#timecheck}}
+                {{#str}}lastcheck, report_securityaudit{{/str}} {{timecheck}}
+                {{/timecheck}}
                 </div>
             </div>
         </div>
