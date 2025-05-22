@@ -17,9 +17,9 @@
 /**
  * Definition of report_securityaudit tasks.
  *
- * @package    report_securityaudit
- * @category   task
- * @copyright  2024, LMSwithAI <contact@lmswithai.com>
+ * @package     report_securityaudit
+ * @category    task
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
@@ -32,5 +32,5 @@ $tasks = [
         'day' => '*',
         'month' => '*',
         'dayofweek' => '*',
-    ]
+    ],
 ];

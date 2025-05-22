@@ -62,7 +62,6 @@ class adminhasmfa extends \core\check\check {
             return new result($status, $summary, $details);
         }
 
-
         $sql = "SELECT u.id, u.firstname, u.lastname, u.email FROM {user} u WHERE u.id IN ($CFG->siteadmins)";
 
         $admins = $DB->get_records_sql($sql);

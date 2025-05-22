@@ -18,7 +18,7 @@
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ use stdClass;
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class monitor implements renderable, templatable {
@@ -56,18 +56,6 @@ class monitor implements renderable, templatable {
     protected $toptenloginsfailed = [];
 
     /**
-     * __construct.
-     *
-     * @param  string $type
-     * @param  string $url
-     * @param  string $detail
-     */
-    public function __construct() {
-
-
-    }
-
-    /**
      * Set title.
      *
      * @param  string title.
@@ -78,6 +66,11 @@ class monitor implements renderable, templatable {
         $this->icon = $icon;
     }
 
+    /**
+     * Daily login failures.
+     *
+     * @return array
+     */
     private function daily_login_failures() {
         global $DB;
 
@@ -125,15 +118,11 @@ class monitor implements renderable, templatable {
         $renderer = $PAGE->get_renderer('report_securityaudit');
         $data = new stdClass();
 
-
         $data->base['title'] = $this->title;
         $data->base['headcss'] = $renderer->load_css();
         $data->base['headjs'] = $renderer->load_js();
         $data->favicon = $renderer->favicon();
-
-
         $data->loginternal = !report_securityaudit_report_log_is_internal();
-
         $data->pagetitle = $data->base['title'];
         $data->pageicon = $this->icon;
 
@@ -143,8 +132,10 @@ class monitor implements renderable, templatable {
         $charjs = new \moodle_url('/report/securityaudit/js/failureslogin.js');
         $data->failureslogin = ['url' => $charjs->out(),
                                 'datafailureslogin' => json_encode($dailylog),
-                                'strings' => json_encode(['incorrectlogins' => get_string( 'Incorrectlogins', 'report_securityaudit')])];
-
+                                'strings' => json_encode([
+                                    'incorrectlogins' => get_string( 'incorrectlogins', 'report_securityaudit'),
+                                ]),
+                                ];
 
         foreach ($this->toptenloginsfailed as $userid => $failed) {
             $user = \core_user::get_user($userid);
@@ -164,7 +155,8 @@ class monitor implements renderable, templatable {
             'modaction' => 'r',
             'origin' => 'web',
             'edulevel' => 0,
-            'logreader' => 'logstore_standard',]);
+            'logreader' => 'logstore_standard',
+            ]);
 
             $data->failureslogintop[] = [
                 'fullname' => fullname($user),

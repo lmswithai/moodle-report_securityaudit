@@ -13,20 +13,21 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * Privacy Subsystem implementation for auth_none.
+ * Privacy Subsystem implementation for report_securityaudit.
  *
- * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @package    report_securityaudit
+ * @copyright  2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace report_securityaudit\privacy;
 
 /**
- * Privacy Subsystem for auth_none implementing null_provider.
+ * Privacy Subsystem for report_securityaudit implementing null_provider.
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements \core_privacy\local\metadata\null_provider {

@@ -18,7 +18,7 @@
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -31,7 +31,7 @@ use moodle_url;
 /**
  * The renderer for the report securityaudit.
  *
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class renderer extends plugin_renderer_base {
@@ -45,6 +45,11 @@ class renderer extends plugin_renderer_base {
         return new \moodle_url('/report/securityaudit/pix/favicon.ico');
     }
 
+    /**
+     * Render base data.
+     *
+     * @param  mixed $data
+     */
     public function load_render_base_data($data) {
         global $SITE, $CFG;
 
@@ -106,27 +111,33 @@ class renderer extends plugin_renderer_base {
     }
 
 
+    /**
+     * Sidebar elements.
+     *
+     * @param  string $element.
+     * @return array
+     */
     public function sidebar_elements($element) {
 
         $sidebar = [
             [
                 'icon' => 'pe-7s-display1',
-                'title' =>  get_string('securityaudit', 'report_securityaudit'),
+                'title' => get_string('securityaudit', 'report_securityaudit'),
                 'url' => new moodle_url('/report/securityaudit/index.php'),
-                'active' => false
+                'active' => false,
             ],
             [
                 'icon' => 'pe-7s-door-lock',
-                'title' =>  get_string('requirementsnistwo', 'report_securityaudit'),
+                'title' => get_string('requirementsnistwo', 'report_securityaudit'),
                 'url' => new moodle_url('/report/securityaudit/nis.php'),
-                'active' => false
+                'active' => false,
             ],
             [
                 'icon' => 'pe-7s-graph2',
-                'title' =>  get_string('monitoring', 'report_securityaudit'),
+                'title' => get_string('monitoring', 'report_securityaudit'),
                 'url' => new moodle_url('/report/securityaudit/monitor.php'),
-                'active' => false
-            ]
+                'active' => false,
+            ],
         ];
 
         if ($element) {

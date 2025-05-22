@@ -1,6 +1,6 @@
 # NIS2 and GDPR Security Audit Report
 
-![screenshot](pix/screen1.png "NIS2 and GDPR Security Audit Report")
+![screenshot](pix/example.png "NIS2 and GDPR Security Audit Report")
 
 ---------
 
@@ -13,7 +13,7 @@ When2Update
 
 Moodle profile: https://moodle.org/user/profile.php?id=3286395
 
-Website: https://when2update.com/
+Website: https://when2update.lmswithai.com/
 
 Installation
 ------------

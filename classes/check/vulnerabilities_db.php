@@ -18,13 +18,11 @@
  * Verifies unsupported noauth setting
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\check;
-
-defined('MOODLE_INTERNAL') || die();
 
 use core\check\result;
 
@@ -32,7 +30,7 @@ use core\check\result;
  * Verifies unsupported noauth setting
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class vulnerabilities_db extends \core\check\check {
@@ -45,7 +43,7 @@ class vulnerabilities_db extends \core\check\check {
     public function get_action_link(): ?\action_link {
         return new \action_link(
             new \moodle_url('/admin/environment.php'),
-            get_string('environment','admin'));
+            get_string('environment', 'admin'));
     }
 
     /**
@@ -63,25 +61,25 @@ class vulnerabilities_db extends \core\check\check {
             $version = '';
             $summaryvunl = 0;
             require_once($CFG->libdir.'/environmentlib.php');
-            require("$CFG->dirroot/version.php");       // defines $version, $release, $branch and $maturity
+            require("$CFG->dirroot/version.php");
 
-            list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+            list($envstatus, $environmentresults) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
 
             if ($envstatus) {
-                foreach ($environment_results as $environment_result) {
-                    $type = $environment_result->getPart();
+                foreach ($environmentresults as $environmentresult) {
+                    $type = $environmentresult->getPart();
                     if ($type == 'database') {
 
-                        $versiondb = $environment_result->getCurrentVersion();
+                        $versiondb = $environmentresult->getCurrentVersion();
 
-                        $info = $environment_result->getInfo();
-                        $dbtype = 'unknown'; // Domyślna wartość, jeśli żaden z typów nie zostanie znaleziony
+                        $info = $environmentresult->getInfo();
+                        $dbtype = 'unknown';
 
                         if (stripos($info, 'mysql') !== false) {
                             $dbtype = 'mysql';
-                        } elseif (stripos($info, 'mariadb') !== false) {
+                        } else if (stripos($info, 'mariadb') !== false) {
                             $dbtype = 'mariadb';
-                        } elseif (stripos($info, 'postgres') !== false) {
+                        } else if (stripos($info, 'postgres') !== false) {
                             $dbtype = 'postgresql';
                         }
 
@@ -93,7 +91,7 @@ class vulnerabilities_db extends \core\check\check {
             $apicomunctation = false;
 
             if (preg_match('/^\d+(\.\d+)*$/', $versiondb) && $dbtype != 'unknown') {
-                $url = 'https://when2update.com/wp-json/report-securityaudit-api/v1/calculate';
+                $url = 'https://when2update.lmswithai.com/wp-json/report-securityaudit-api/v1/calculate';
                 $curl = new \curl();
                 $curl->setopt(['CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3]);
                 $response = $curl->get($url, ['type' => $dbtype, 'version' => $versiondb]);
@@ -103,21 +101,21 @@ class vulnerabilities_db extends \core\check\check {
 
                 if (is_int($totalnvd) && (is_int($needupdate))) {
 
-                        if ($totalnvd > 0) {
-                            $summaryvunl = $totalnvd;
-                            $status = result::ERROR;
-                            $summary = get_string('check_vuls_founderror_db', 'report_securityaudit', $summaryvunl);
-                        } else {
+                    if ($totalnvd > 0) {
+                        $summaryvunl = $totalnvd;
+                        $status = result::ERROR;
+                        $summary = get_string('check_vuls_founderror_db', 'report_securityaudit', $summaryvunl);
+                    } else {
 
-                            if (!$needupdate) {
-                                $status = result::OK;
-                                $summary = get_string('check_vuls_ok_db', 'report_securityaudit');
-                            } else {
-                                $status = result::ERROR;
-                                $summary = get_string('check_vuls_nosupporterror_db', 'report_securityaudit');
-                            }
+                        if (!$needupdate) {
+                            $status = result::OK;
+                            $summary = get_string('check_vuls_ok_db', 'report_securityaudit');
+                        } else {
+                            $status = result::ERROR;
+                            $summary = get_string('check_vuls_nosupporterror_db', 'report_securityaudit');
                         }
-                        $apicomunctation = true;
+                    }
+                    $apicomunctation = true;
 
                 }
 

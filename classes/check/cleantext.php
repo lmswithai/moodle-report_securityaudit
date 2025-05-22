@@ -18,7 +18,7 @@
  *  Adds for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -32,7 +32,7 @@ use html_writer;
  *  Adds for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class cleantext extends \core\check\check {
@@ -65,7 +65,9 @@ class cleantext extends \core\check\check {
         $forcecleanurl = new moodle_url('/admin/settings.php?section=experimentalsettings#admin-forceclean');
         $details = get_string('checkcleantextdetails', 'report_securityaudit');
         $details .= html_writer::empty_tag('br');
-        $details .= html_writer::link($forcecleanurl, get_string('experimentalsettings', 'admin'), ['class' => 'btn btn-outline-primary btn-sm']);
+        $details .= html_writer::link($forcecleanurl,
+            get_string('experimentalsettings', 'admin'),
+            ['class' => 'btn btn-outline-primary btn-sm']);
 
         return new result($status, $summary, $details);
     }

@@ -19,13 +19,11 @@
  *
  * @package     report_securityaudit
  * @category    admin
- * @copyright   2024, LMSwithAI <contact@lmswithai.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\task;
-
-require_once($CFG->dirroot.'/report/securityaudit/locallib.php');
 
 use stdClass;
 
@@ -48,6 +46,8 @@ class user_login_failed_stats extends \core\task\scheduled_task {
      */
     public function execute() {
         global $DB;
+
+        require_once($CFG->dirroot.'/report/securityaudit/locallib.php');
 
         $yesterdaydate = strtotime('yesterday');
         $date = date('Y-m-d', $yesterdaydate);

@@ -18,7 +18,7 @@
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ use stdClass;
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dashboard implements renderable, templatable {
@@ -133,7 +133,7 @@ class dashboard implements renderable, templatable {
     private function load_module() {
         global $CFG;
 
-        $module =  [
+        $module = [
             'envirolment' => [
                 'core_displayerrors',
                 'core_unsecuredataroot',
@@ -283,7 +283,7 @@ class dashboard implements renderable, templatable {
             case 'report_securityaudit_vulnerabilities_db':
                 $button = ['downloadurl' => new moodle_url($PAGE->url, ['dbvul' => true])];
                 break;
-                default:
+            default:
                 $button = '';
                 break;
         }
@@ -495,15 +495,10 @@ class dashboard implements renderable, templatable {
         $data->base['headcss'] = $renderer->load_css();
         $data->base['headjs'] = $renderer->load_js();
 
-
         $setturl = new \moodle_url('/admin/settings.php?section=reportsecurityaudit');
-        $data->setting = [
-                'url' => $setturl
-        ];
-
+        $data->setting = ['url' => $setturl];
         $data->favicon = $renderer->favicon();
         $data->sidebar = $renderer->sidebar_elements('dashboard');
-
         $data->pagetitle = $data->base['title'];
         $data->pageicon = $this->icon;
 

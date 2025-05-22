@@ -18,13 +18,11 @@
  * Verifies unsupported noauth setting
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\check;
-
-defined('MOODLE_INTERNAL') || die();
 
 use core\check\result;
 
@@ -32,7 +30,7 @@ use core\check\result;
  * Verifies unsupported noauth setting
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class vulnerabilities_php extends \core\check\check {
@@ -45,7 +43,7 @@ class vulnerabilities_php extends \core\check\check {
     public function get_action_link(): ?\action_link {
         return new \action_link(
             new \moodle_url('/admin/phpinfo.php'),
-            get_string('phpinfo','moodle'));
+            get_string('phpinfo', 'moodle'));
     }
 
     /**
@@ -63,16 +61,16 @@ class vulnerabilities_php extends \core\check\check {
             $version = '';
             $summaryvunl = 0;
             require_once($CFG->libdir.'/environmentlib.php');
-            require("$CFG->dirroot/version.php");       // defines $version, $release, $branch and $maturity
+            require("$CFG->dirroot/version.php");
 
-            list($envstatus, $environment_results) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
+            list($envstatus, $environmentresults) = check_moodle_environment(normalize_version($release), ENV_SELECT_RELEASE);
 
             if ($envstatus) {
-                foreach ($environment_results as $environment_result) {
-                    $type = $environment_result->getPart();
+                foreach ($environmentresults as $environmentresult) {
+                    $type = $environmentresult->getPart();
 
                     if ($type == 'php') {
-                        $versionphp = $environment_result->getCurrentVersion();
+                        $versionphp = $environmentresult->getCurrentVersion();
                         break;
                     }
                 }
@@ -81,7 +79,7 @@ class vulnerabilities_php extends \core\check\check {
             $apicomunctation = false;
 
             if (preg_match('/^\d+(\.\d+)*$/', $versionphp)) {
-                $url = 'https://when2update.com/wp-json/report-securityaudit-api/v1/calculate';
+                $url = 'https://when2update.lmswithai.com/wp-json/report-securityaudit-api/v1/calculate';
                 $curl = new \curl();
                 $curl->setopt(['CURLOPT_TIMEOUT' => 3, 'CURLOPT_CONNECTTIMEOUT' => 3]);
                 $response = $curl->get($url, ['type' => 'php', 'version' => $versionphp]);
@@ -91,21 +89,21 @@ class vulnerabilities_php extends \core\check\check {
 
                 if (is_int($totalnvd) && (is_int($needupdate))) {
 
-                        if ($totalnvd > 0) {
-                            $summaryvunl = $totalnvd;
-                            $status = result::ERROR;
-                            $summary = get_string('check_vuls_founderror_php', 'report_securityaudit', $summaryvunl);
-                        } else {
+                    if ($totalnvd > 0) {
+                        $summaryvunl = $totalnvd;
+                        $status = result::ERROR;
+                        $summary = get_string('check_vuls_founderror_php', 'report_securityaudit', $summaryvunl);
+                    } else {
 
-                            if (!$needupdate) {
-                                $status = result::OK;
-                                $summary = get_string('check_vuls_ok_php', 'report_securityaudit');
-                            } else {
-                                $status = result::ERROR;
-                                $summary = get_string('check_vuls_nosupporterror_php', 'report_securityaudit');
-                            }
+                        if (!$needupdate) {
+                            $status = result::OK;
+                            $summary = get_string('check_vuls_ok_php', 'report_securityaudit');
+                        } else {
+                            $status = result::ERROR;
+                            $summary = get_string('check_vuls_nosupporterror_php', 'report_securityaudit');
                         }
-                        $apicomunctation = true;
+                    }
+                    $apicomunctation = true;
 
                 }
 
@@ -121,7 +119,6 @@ class vulnerabilities_php extends \core\check\check {
             $status = result::UNKNOWN;
             $summary = get_string('check_vuls_getdata', 'report_securityaudit');
         }
-
 
         $details = '';
 

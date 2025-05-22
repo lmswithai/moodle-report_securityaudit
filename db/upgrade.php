@@ -18,11 +18,9 @@
  * CAS authentication plugin upgrade code
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Function to upgrade auth_cas.

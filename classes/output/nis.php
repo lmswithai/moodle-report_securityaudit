@@ -18,7 +18,7 @@
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -35,7 +35,7 @@ use stdClass;
  * A table of check results
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class nis implements renderable, templatable {
@@ -51,22 +51,9 @@ class nis implements renderable, templatable {
     protected $icon = '';
 
     /**
-     * __construct.
-     *
-     * @param  string $type
-     * @param  string $url
-     * @param  string $detail
-     */
-    public function __construct() {
-
-
-    }
-
-    /**
      * Set title.
      *
      * @param  string title.
-     * @return string title.
      */
     public function set_title($string, $icon) {
         $this->title = $string;
@@ -79,22 +66,17 @@ class nis implements renderable, templatable {
      * @return stdClass
      */
     public function export_for_template(renderer_base $output): stdClass {
-        global $SITE, $CFG, $PAGE;
+        global $PAGE;
 
         $renderer = $PAGE->get_renderer('report_securityaudit');
         $data = new stdClass();
-
-
         $data->base['title'] = $this->title;
         $data->base['headcss'] = $renderer->load_css();
         $data->base['headjs'] = $renderer->load_js();
         $data->favicon = $renderer->favicon();
-
         $data->pagetitle = $data->base['title'];
         $data->pageicon = $this->icon;
-
         $data = $renderer->load_render_base_data($data);
-
         $data->sidebar = $renderer->sidebar_elements('nis');
 
         return $data;

@@ -18,7 +18,7 @@
  * Plugin functions for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -41,7 +41,7 @@ function report_securityaudit_securityaudit_checks() {
         new report_securityaudit\check\guestloginbutton(),
         new report_securityaudit\check\backup_auto_active(),
         new report_securityaudit\check\cron(),
-        new report_securityaudit\check\cleantext()
+        new report_securityaudit\check\cleantext(),
     ];
 
     if (get_config('report_securityaudit', 'checkw2u') == 1) {

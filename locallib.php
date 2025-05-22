@@ -18,7 +18,7 @@
  * Plugin functions for the report_securityaudit plugin.
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -61,7 +61,7 @@ function report_securityaudit_report_log_faillogin_yesterday() {
 
     // If reader is not a sql_internal_table_reader.
     if (!($reader instanceof \core\log\sql_internal_table_reader)) {
-        return array();
+        return [];
     }
 
     $today = time();
@@ -75,8 +75,8 @@ function report_securityaudit_report_log_faillogin_yesterday() {
     $params = [
         'eventname' => $eventname,
         'yesterdaystart' => $yesterdaystart,
-        'yesterdayend' => $yesterdayend
-            ];
+        'yesterdayend' => $yesterdayend,
+        ];
 
     return $DB->get_records_sql("SELECT *
                                 FROM {" . $logtable . "}

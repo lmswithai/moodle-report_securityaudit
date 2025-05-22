@@ -17,8 +17,8 @@
 /**
  * Capabilities
  *
- * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @package    report_securityaudit
+ * @copyright  2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

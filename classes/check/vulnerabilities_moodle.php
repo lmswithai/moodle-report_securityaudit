@@ -18,22 +18,19 @@
  * Verifies unsupported noauth setting
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace report_securityaudit\check;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\check\result;
-use mod_h5pactivity\output\result\truefalse;
 
 /**
  * Verifies unsupported noauth setting
  *
  * @package     report_securityaudit
- * @copyright   2024, when2update.com <consultations@when2update.com>
+ * @copyright   2025, when2update.lmswithai.com <consultations@when2update.lmswithai.com>
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class vulnerabilities_moodle extends \core\check\check {
@@ -67,7 +64,7 @@ class vulnerabilities_moodle extends \core\check\check {
 
                 $accesskey = '';
 
-                $url = 'https://api.when2update.com';
+                $url = 'https://when2update.lmswithai.com/api';
                 $curl = new \curl();
                 $curl->setopt(['CURLOPT_TIMEOUT' => 2, 'CURLOPT_CONNECTTIMEOUT' => 2]);
                 $response = $curl->get($url, ['type' => 'moodle', 'version' => $versionmdl, 'accesskey' => $accesskey]);
@@ -83,18 +80,20 @@ class vulnerabilities_moodle extends \core\check\check {
                         $status = result::ERROR;
                         $summary = get_string('check_vuls_founderror_moodle', 'report_securityaudit', $summaryvunl);
 
-                        $minimalupdateto = isset($checkdata->minimalupdateto) ? clean_param($checkdata->minimalupdateto, PARAM_TEXT) : '';
+                        if (isset($checkdata->minimalupdateto)) {
+                            $minimalupdateto = clean_param($checkdata->minimalupdateto, PARAM_TEXT);
+                        } else {
+                            $minimalupdateto = '';
+                        }
 
                         if ($minimalupdateto) {
                             $summary .= '<br>';
                             $summary .= get_string('recommended_minimum_update', 'report_securityaudit', $minimalupdateto);
                         }
 
-                    } elseif (isset($checkdata->vulnerabilities) && count($checkdata->vulnerabilities) == 0) {
+                    } else if (isset($checkdata->vulnerabilities) && count($checkdata->vulnerabilities) == 0) {
                         $status = result::OK;
                         $summary = get_string('check_vuls_ok_moodle', 'report_securityaudit');
-                    } else {
-
                     }
                 } else {
                     $status = result::ERROR;
@@ -107,58 +106,55 @@ class vulnerabilities_moodle extends \core\check\check {
 
             }
 
-        $details = '';
+            $details = '';
 
-        if ($summaryvunl > 0) {
+            if ($summaryvunl > 0) {
 
-            $details .= \html_writer::start_tag('table', array('class' => 'table'));
+                $details .= \html_writer::start_tag('table', ['class' => 'table']);
 
-
-
-            $tr = \html_writer::tag('th ', get_string('cve', 'report_securityaudit'), ['scope' => 'col']);
-            $tr .= \html_writer::tag('th ', get_string('vulnerabilitie', 'report_securityaudit'), ['scope' => 'col']);
-            if ($registered) {
-                $tr .= \html_writer::tag('th ', get_string('area', 'report_securityaudit'), ['scope' => 'col']);
-                $tr .= \html_writer::tag('th ', get_string('versionfixed', 'report_securityaudit'), ['scope' => 'col']);
-            }
-            $thead = \html_writer::tag('tr', $tr);
-            $details .=  \html_writer::tag('thead', $thead);
-            $details .= \html_writer::start_tag('tbody');
-
-            foreach ($checkdata->vulnerabilities as $vuln) {
-                $cve = isset($vuln->cve) ? clean_param($vuln->cve, PARAM_TEXT) : '';
-                $severity = isset($vuln->cve) ? clean_param($vuln->issue, PARAM_TEXT) : '';
-                $area = isset($vuln->area) ? clean_param($vuln->area, PARAM_TEXT) : '';
-                $fixed = isset($vuln->fixed) ? clean_param($vuln->fixed, PARAM_TEXT) : '';
-
-                $tr = \html_writer::tag('td', $cve);
-                $tr .= \html_writer::tag('td', $severity);
+                $tr = \html_writer::tag('th ', get_string('cve', 'report_securityaudit'), ['scope' => 'col']);
+                $tr .= \html_writer::tag('th ', get_string('vulnerabilitie', 'report_securityaudit'), ['scope' => 'col']);
                 if ($registered) {
-                    if ($area) {
-                        $tr .= \html_writer::tag('td', $area);
-                    } else {
-                        $tr .= \html_writer::tag('td', '');
-                    }
-                    if ($fixed) {
-                        $tr .= \html_writer::tag('td', $fixed);
-                    } else {
-                        $tr .= \html_writer::tag('td', '');
-                    }
+                    $tr .= \html_writer::tag('th ', get_string('area', 'report_securityaudit'), ['scope' => 'col']);
+                    $tr .= \html_writer::tag('th ', get_string('versionfixed', 'report_securityaudit'), ['scope' => 'col']);
                 }
-                $row = \html_writer::tag('tr', $tr);
-                $details .= $row;
+                $thead = \html_writer::tag('tr', $tr);
+                $details .= \html_writer::tag('thead', $thead);
+                $details .= \html_writer::start_tag('tbody');
+
+                foreach ($checkdata->vulnerabilities as $vuln) {
+                    $cve = isset($vuln->cve) ? clean_param($vuln->cve, PARAM_TEXT) : '';
+                    $severity = isset($vuln->cve) ? clean_param($vuln->issue, PARAM_TEXT) : '';
+                    $area = isset($vuln->area) ? clean_param($vuln->area, PARAM_TEXT) : '';
+                    $fixed = isset($vuln->fixed) ? clean_param($vuln->fixed, PARAM_TEXT) : '';
+
+                    $tr = \html_writer::tag('td', $cve);
+                    $tr .= \html_writer::tag('td', $severity);
+                    if ($registered) {
+                        if ($area) {
+                            $tr .= \html_writer::tag('td', $area);
+                        } else {
+                            $tr .= \html_writer::tag('td', '');
+                        }
+                        if ($fixed) {
+                            $tr .= \html_writer::tag('td', $fixed);
+                        } else {
+                            $tr .= \html_writer::tag('td', '');
+                        }
+                    }
+                    $row = \html_writer::tag('tr', $tr);
+                    $details .= $row;
+                }
+
+                $details .= \html_writer::end_tag('tbody');
+                $details .= \html_writer::end_tag('table');
             }
 
-            $details .= \html_writer::end_tag('tbody');
-            $details .= \html_writer::end_tag('table');
+        } else {
+            $status = result::UNKNOWN;
+            $summary = get_string('check_vuls_getdata', 'report_securityaudit');
+            $details = '';
         }
-
-    } else {
-        $status = result::UNKNOWN;
-        $summary = get_string('check_vuls_getdata', 'report_securityaudit');
-        $details = '';
-    }
-
 
         return new result($status, $summary, $details);
     }
