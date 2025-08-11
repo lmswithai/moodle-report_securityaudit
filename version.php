@@ -25,8 +25,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'report_securityaudit';
-$plugin->release = '0.4.1.0';
-$plugin->version = 2025052200;
+$plugin->release = '0.4.1.1';
+$plugin->version = 2025081100;
 $plugin->requires = 2020061500;
 $plugin->supported = [39, 500];
 $plugin->maturity = MATURITY_RC;

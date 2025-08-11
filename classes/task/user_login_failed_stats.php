@@ -45,7 +45,7 @@ class user_login_failed_stats extends \core\task\scheduled_task {
      * Execute the task.
      */
     public function execute() {
-        global $DB;
+        global $DB, $CFG;
 
         require_once($CFG->dirroot.'/report/securityaudit/locallib.php');
 
